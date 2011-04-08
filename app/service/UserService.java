@@ -1,10 +1,20 @@
 package service;
 
 import models.User;
+import persistence.dao.api.IUserDao;
+import persistence.dao.impl.UserDaoImpl;
 
-class UserService {
+public class UserService {
 	
-	public User getUserByOpenId(final String openId){
+	private IUserDao userDao;
+
+	public UserService() {
+		userDao = new UserDaoImpl();
+	}
+	
+	public User getUserByOpenId(final String openId) {
+		//User user = userDao.getUserByOpenId(openId);
+		
 		User user = new User();
 		user.setOpenId(openId);
 		//TODO 
@@ -13,6 +23,6 @@ class UserService {
 	}
 	
 	public void storeUser(User user){
-		
+		//userDao.store(user);
 	}
 }

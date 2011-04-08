@@ -1,9 +1,17 @@
-#{if flash.error}
-<h1>${flash.error}</h1>
-#{/if}
+#{extends 'baseframe.html' /}
+#{set title:'milk - Login' /}
 
-<form action="@{authenticate()}" method="POST">
-    <label for="user">What's your OpenID?</label>
-    <input type="text" name="user" id="user" />
-    <input type="submit" value="login..." />
-</form>
+
+<center>
+	<h1>Login into milk!</h1>
+	<form action="@{authenticate()}" method="POST">
+	    <label for="user">What's your OpenID?</label>
+	    <input type="text" name="user" id="user" />
+	    <input type="submit" value="login..." />
+	</form>
+	
+	#{if flash.error}
+	<h2>${flash.error}</h2>
+	#{/if}
+</center>
+

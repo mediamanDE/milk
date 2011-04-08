@@ -3,7 +3,7 @@ package service;
 import models.Group;
 import models.Message;
 
-class TimelineService {
+public class TimelineService {
 
 	public Message[] getAllMessages(){
 		return null;

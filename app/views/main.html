@@ -1,24 +1,12 @@
-<!DOCTYPE html>
-
-<html>
-    <head>
-        <title>#{get 'title' /}</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-        <link rel="stylesheet" type="text/css" media="screen" href="@{'/public/stylesheets/main.css'}">
-        #{get 'moreStyles' /}
-        <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}">
-        <script src="@{'/public/javascripts/jquery-1.4.2.min.js'}" type="text/javascript" charset="utf-8"></script>
-        #{get 'moreScripts' /}
-    </head>
-    <body>
-    <div id="header" class="sectionbottom ">
+#{extends 'baseframe.html' /}
+	
+	<div id="header" class="sectionbottom ">
         <form id="quick-search" class="quick-search" method="get" action="/dosearchsite.action">
-        <fieldset>
-            <legend>Quick Search</legend>
-            <input class="quick-search-query" id="quick-search-query" type="search" accesskey="q" autocomplete="off" name="queryString" size="25" results="10" placeholder="Search">
-            <input class="quick-search-submit" id="quick-search-submit" type="submit" value="Search">
-            
-        </fieldset>
+	        <fieldset>
+	            <legend>Quick Search</legend>
+	            <input class="quick-search-query" id="quick-search-query" type="search" accesskey="q" autocomplete="off" name="queryString" size="25" results="10" placeholder="Search">
+	            <input class="quick-search-submit" id="quick-search-submit" type="submit" value="Search">
+	        </fieldset>
         </form>
     </div>
 
@@ -27,6 +15,3 @@
     </h1>
 
     #{doLayout /}
-    
-    </body>
-</html>
