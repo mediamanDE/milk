@@ -22,3 +22,5 @@ GET     /public/                                staticDir:public
 
 # Catch all
 *       /{controller}/{action}                  {controller}.{action}
+GET   /login                authentication.authenticate
+*     /authenticate         Application.authentication
