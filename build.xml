@@ -1,25 +1,13 @@
-<project name="milk" basedir=".">
+<project name="milk" basedir=".." default="build-play-war">
 	
-	<property file="local.properties" />
-	<property file="build.properties" />
-
-	<target name="prepare-build">
-	   <!--
-	   <delete dir="${basedir}/precompiled" />
-	   -->
-	    <exec dir="${play.home}" executable="play" vmlauncher="false">
-	    	<arg value="clean" />
-	    	<arg value="${basedir}" />
-	    </exec>
-		<delete dir="precompiled" />
-        <delete dir="${dist.dir}" />
-	</target>
+	<property file="milk/local.properties" />
+	<property file="milk/build.properties" />
 	
 	<target name="build-play-war">
         <mkdir dir="${dist.dir}" />
 		<exec dir="${play.home}" executable="play" vmlauncher="false">
 			<arg value="war"/>
-			<arg value="${basedir}" />
+			<arg value="${app.dir}" />
             <arg value="--zip"/>
             <arg value="--output=${war.file}"/>
 		</exec>
