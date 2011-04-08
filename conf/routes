@@ -19,7 +19,7 @@ GET     /logout/ 				                    Authentication.logout
 
 GET     /public/                                    staticDir:public
 
-GET     /                                           Application.index
+GET     /                                           GlobalTimeline.timeline
 GET     /{username}                                 User.profile
 GET     /{username}/edit                            User.edit
 
