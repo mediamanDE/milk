@@ -1,7 +1,5 @@
 package models;
 
-import com.mongodb.Mongo;
-
 public class User {
 	private int _id;
 	private String openId;
