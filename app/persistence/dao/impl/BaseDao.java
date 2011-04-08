@@ -10,8 +10,8 @@ import com.mongodb.DBObject;
 import com.mongodb.DBCursor;
 import com.mongodb.MongoException;
 
-public class BaseDao {
-
+public class BaseDao implements IDBConstants {
+	
 	protected static Mongo mongo = null;
 
 	public BaseDao() {
@@ -21,7 +21,7 @@ public class BaseDao {
 	protected synchronized void init() {
 		if (mongo == null) {
 			try {
-				mongo = new Mongo( "localhost" , 27017 );
+				mongo = new Mongo( DATABASE_HOST , DATABASE_PORT );
 				
 			} catch (UnknownHostException uhe) {
 				uhe.printStackTrace();
@@ -31,14 +31,14 @@ public class BaseDao {
 		}
 	}
 
-	protected DB getDatabase(final String dbName) {
-		DB db = mongo.getDB("milk");
+	protected DB getDatabase() {
+		DB db = mongo.getDB(DATABASE_NAME);
 		return db;
 	}
 	
 	public void testInsert() {
 		
-		DB db = getDatabase("");
+		DB db = getDatabase();
 		DBCollection coll = db.getCollection("testCollection");
 		
 		BasicDBObject doc = new BasicDBObject();
@@ -59,7 +59,7 @@ public class BaseDao {
 
 	public void testFind() {
 		
-		DB db = getDatabase("");
+		DB db = getDatabase();
 		DBCollection coll = db.getCollection("testCollection");
 		
 		DBObject myDoc = coll.findOne();

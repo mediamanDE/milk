@@ -13,16 +13,10 @@ public class UserService {
 	}
 	
 	public User getUserByOpenId(final String openId) {
-		//User user = userDao.getUserByOpenId(openId);
-		
-		User user = new User();
-		user.setOpenId(openId);
-		//TODO 
-		user.setDisplayname("Hans Peter");
-		return user;
+		return userDao.getByOpenId(openId);
 	}
-	
+
 	public void storeUser(User user){
-		//userDao.store(user);
+		userDao.store(user);
 	}
 }
