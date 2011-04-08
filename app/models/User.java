@@ -1,7 +1,6 @@
 package models;
 
 public class User {
-
 	private int _id;
 	private String openId;
 	private String nickname;

@@ -1,6 +1,6 @@
 package models;
 
 public class ExternalLink {
-	private String name;
-	private String url;
+    private String name;
+    private String url;
 }
