@@ -1,7 +1,11 @@
 <project name="milk" basedir=".." default="build-play-war">
 	
 	<property file="milk/local.properties" />
-	<property file="milk/build.properties" />
+
+	<property name="play.home" location="/opt/play-1.1.1" />
+	<property name="app.dir" location="${basedir}/${ant.project.name}" />
+	<property name="dist.dir" location="${basedir}/milk-dist" />
+	<property name="war.file" location="${dist.dir}/${ant.project.name}" />
 	
 	<target name="build-play-war">
         <mkdir dir="${dist.dir}" />
