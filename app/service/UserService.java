@@ -2,7 +2,7 @@ package service;
 
 import models.User;
 
-class UserService {
+public class UserService {
 	
 	public User getUserByOpenId(final String openId){
 		User user = new User();
