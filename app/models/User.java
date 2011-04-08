@@ -3,7 +3,6 @@ package models;
 import com.mongodb.Mongo;
 
 public class User {
-	private int _id;
 	private String openId;
 	private String nickname;
 	private String fullname;
@@ -13,18 +12,6 @@ public class User {
 	private String timezone;
 	private ExternalLink[] externalLinks;
 	
-	/**
-	 * @return the _id
-	 */
-	public int get_id() {
-		return _id;
-	}
-	/**
-	 * @param _id the _id to set
-	 */
-	public void set_id(int _id) {
-		this._id = _id;
-	}
 	/**
 	 * @return the openId
 	 */
