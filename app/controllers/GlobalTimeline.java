@@ -17,5 +17,10 @@ public class GlobalTimeline extends Controller {
 		render(currentMessages);
 		
 	}
+	
+	public static void sendMessage(String messageText, String messageGroups){
+		
+		
+	}
 
 }
