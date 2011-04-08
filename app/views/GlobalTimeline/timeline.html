@@ -1,0 +1,29 @@
+#{extends 'main.html' /}
+#{set title:"Global Timeline"  /}
+
+#{list items:message, as:'entity'}
+        <div class="message">
+            <div class="message-text">
+            	${entity.messagetext}
+            </div>
+            
+            <div class="message-metadata">
+                <span class="message-author">
+                        ${entity.from}
+                </span>
+                <span class="message-date">
+                        ${entity.from}
+                </span>
+                <div class="message-groups">
+                        
+                </div>
+            </div>
+        </div>
+#{/list}
+<form action="" method="">
+    <label for="user">What's your OpenID?</label>
+    <input type="text" name="user" id="user" />
+    <input type="submit" value="login..." />
+</form>
+		
+

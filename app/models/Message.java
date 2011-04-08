@@ -9,4 +9,78 @@ public class Message {
     private Message[] ancestors;
     private String messagetext;
     private User from;
+    
+	/**
+	 * @return the _id
+	 */
+	public int get_id() {
+		return _id;
+	}
+	/**
+	 * @param _id the _id to set
+	 */
+	public void set_id(int _id) {
+		this._id = _id;
+	}
+	/**
+	 * @return the postdate
+	 */
+	public Date getPostdate() {
+		return postdate;
+	}
+	/**
+	 * @param postdate the postdate to set
+	 */
+	public void setPostdate(Date postdate) {
+		this.postdate = postdate;
+	}
+	/**
+	 * @return the groups
+	 */
+	public Group[] getGroups() {
+		return groups;
+	}
+	/**
+	 * @param groups the groups to set
+	 */
+	public void setGroups(Group[] groups) {
+		this.groups = groups;
+	}
+	/**
+	 * @return the ancestors
+	 */
+	public Message[] getAncestors() {
+		return ancestors;
+	}
+	/**
+	 * @param ancestors the ancestors to set
+	 */
+	public void setAncestors(Message[] ancestors) {
+		this.ancestors = ancestors;
+	}
+	/**
+	 * @return the messagetext
+	 */
+	public String getMessagetext() {
+		return messagetext;
+	}
+	/**
+	 * @param messagetext the messagetext to set
+	 */
+	public void setMessagetext(String messagetext) {
+		this.messagetext = messagetext;
+	}
+	/**
+	 * @return the from
+	 */
+	public User getFrom() {
+		return from;
+	}
+	/**
+	 * @param from the from to set
+	 */
+	public void setFrom(User from) {
+		this.from = from;
+	}
+    
 }
