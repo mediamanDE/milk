@@ -7,15 +7,17 @@ import play.libs.OpenID.UserInfo;
 import models.User;
 
 public class Register extends Controller {
-	public void register(){
-		
+	
+	public static void register(){
+		render();
 	}
 	
 	public void currentFields(){
 		
 	} 
 	public void saveFileds(String fullname, String displayname){
-		if(fullname != "" && displayname != ""){
+		//FIXME: Vergleichsoperatoren anpassen
+		if(fullname  != "" && displayname != ""){
 			User newuser = new User();
 	        UserInfo verifiedUser = OpenID.getVerifiedID();
 	        String Nickname = verifiedUser.id;
