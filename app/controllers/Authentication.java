@@ -7,16 +7,12 @@ import play.mvc.Before;
 import play.mvc.Controller;
 
 public class Authentication extends Controller {
+	
 	@Before(unless={"login", "authenticate"})
-	static void checkAuthenticated() {
+	public static void checkAuthenticated() {
 	    if(!session.contains("user")) {
 	        login();
 	    }
-	}
-	 
-	public static void index() {
-	    /*render("Hello %s!", session.get("user"));*/
-		redirect("/?eingeloggt=" + session.get("user"));
 	}
 	     
 	public static void login() {
@@ -36,7 +32,7 @@ public class Authentication extends Controller {
 	            login();
 	        } 
 	        session.put("user", verifiedUser.id);
-	        index();
+            redirect("/");
 	    } else {
 	        if(!OpenID.id(user).verify()) { // will redirect the user
 	            flash.error("Cannot verify your OpenID");
