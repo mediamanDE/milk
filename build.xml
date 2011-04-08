@@ -10,7 +10,7 @@
 	<target name="build-play-war">
         <mkdir dir="${dist.dir}" />
 		<echo>${play.home}</echo>
-		<exec dir="${play.home}" executable="play" vmlauncher="false">
+		<exec executable="${play.home}/play" vmlauncher="false">
 			<arg value="war"/>
 			<arg value="${app.dir}" />
             <arg value="--zip"/>
