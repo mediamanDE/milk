@@ -17,10 +17,16 @@ GET		/search/										Search.search
 
 GET		/thread/{threadID}							Thread.conversation
 
+#Login
+GET   /login                authentication.login
+*     /authenticate         Application.authentication
+
+#logout
+GET /logout					authentication.logout
+
+
 # Map static resources from the /app/public folder to the /public path
 GET     /public/                                staticDir:public
 
 # Catch all
 *       /{controller}/{action}                  {controller}.{action}
-GET   /login                authentication.authenticate
-*     /authenticate         Application.authentication
