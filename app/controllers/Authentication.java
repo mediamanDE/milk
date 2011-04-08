@@ -35,6 +35,7 @@ public class Authentication extends Controller {
 	            flash.error("Oops. Authentication has failed");
 	            login();
 	        } 
+	        //FIX ME: Add a if-condition, which decides if a user has already filled in every required profile field, if not, redirect him to /register/
 	        session.put("user", verifiedUser.id);
             redirect("/");
 	    } else {
