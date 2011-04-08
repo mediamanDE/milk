@@ -52,3 +52,7 @@ display: none;
 .quick-search-submit {
 display: none;
 }
+
+h1.pagetitle {
+font-size: 2em;
+}
