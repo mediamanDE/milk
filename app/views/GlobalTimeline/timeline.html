@@ -1,5 +1,34 @@
 #{extends 'main.html' /}
 #{set title:"Global Timeline"  /}
 
+<form action="@{sendMessage}" method="POST">
+    <label for="user">Enter your Message :</label>
+    <input type="text" name="messageText" id="messageText" /></br>
+    <label for="groups">Enter the Message Groups :</label>
+    <input type="text" name="messageGroups" id="messageGroups">
+    <input type="submit" value="send..." />
+</form>
 
+#{list items:message, as:'entity'}
+        <div class="message">
+            <div class="message-text">
+            	${entity.messagetext}
+            </div>
+            
+            <div class="message-metadata">
+                <span class="message-author">
+                        ${entity.from}
+                </span>
+                <span class="message-date">
+                        ${entity.from}
+                </span>
+                <div class="message-groups">
+                        
+                </div>
+            </div>
+        </div>
+#{/list}
+
+
+		
 
