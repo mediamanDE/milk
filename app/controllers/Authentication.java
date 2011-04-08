@@ -1,8 +1,8 @@
 package controllers;
 
-import play.Logger;
+import play.data.validation.Required;
 import play.libs.OpenID;
-import play.libs.OpenID.*;
+import play.libs.OpenID.UserInfo;
 import play.mvc.Before;
 import play.mvc.Controller;
 
@@ -16,7 +16,11 @@ public class Authentication extends Controller {
 	}
 	     
 	public static void login() {
-	    render();
+		if(!session.contains("user")) {
+			render();
+		}else{
+			GlobalTimeline.timeline();
+		}
 	}
 	
 	public static void logout(){
