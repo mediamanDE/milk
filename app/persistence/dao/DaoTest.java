@@ -1,6 +1,6 @@
 package persistence.dao;
 
-import persistence.dao.impl.BaseDao;
+import persistence.dao.impl.MessageDaoImpl;
 
 public class DaoTest {
 
@@ -8,9 +8,9 @@ public class DaoTest {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		BaseDao baseDao = new BaseDao();
-		baseDao.testInsert();
-		baseDao.testFind();
+		MessageDaoImpl messageDao = new MessageDaoImpl();
+		messageDao.testInsert();
+		messageDao.testFind();
 	}
 
 }
