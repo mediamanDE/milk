@@ -39,7 +39,7 @@ public class Authentication extends Controller {
 
 	        UserService userdata = new UserService();
 	        models.User theuser = userdata.getUserByOpenId(verifiedUser.id);
-	        if(theuser == null){
+	        if(theuser.getDisplayname() == null){
 	        	redirect("/register/");
 	        }else{
 	        	redirect("/");
