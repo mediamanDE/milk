@@ -4,7 +4,7 @@ import play.mvc.Controller;
 
 public class Search extends Controller {
 	
-	public static void main() {
+	public static void search() {
 		render();
 	}
 
