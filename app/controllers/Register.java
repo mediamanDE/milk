@@ -15,15 +15,26 @@ public class Register extends Controller {
 		
 	} 
 	public void saveFileds(String fullname, String displayname){
-		if(fullname != "" && displayname != ""){
-			User newuser = new User();
-	        UserInfo verifiedUser = OpenID.getVerifiedID();
-	        String Nickname = verifiedUser.id;
-	        Nickname.substring(33);
-			newuser.setDisplayname(displayname);
-			newuser.setFullname(fullname);
-			newuser.setNickname(Nickname);
-			newuser.setOpenId(verifiedUser.id);
+		
+		validation.required(fullname);
+		validation.required(displayname);
+		
+		if(validation.hasErrors()){
+			for(play.data.validation.Error error : validation.errors()) {
+	             flash.error(error.message());
+	        }
+			register();
+		}else{
+			if(fullname != "" && displayname != ""){
+				User newuser = new User();
+				UserInfo verifiedUser = OpenID.getVerifiedID();
+				String Nickname = verifiedUser.id;
+				Nickname.substring(33);
+				newuser.setDisplayname(displayname);
+				newuser.setFullname(fullname);
+				newuser.setNickname(Nickname);
+				newuser.setOpenId(verifiedUser.id);
+			}
 		}
 	}
 }

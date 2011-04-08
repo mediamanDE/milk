@@ -1,11 +1,12 @@
 package controllers;
 
+import java.util.List;
+
+import models.Message;
+
 import play.mvc.Controller;
 import play.mvc.With;
 
-import java.util.*;
-
-import models.Message;
 
 @With(Authentication.class)
 public class GlobalTimeline extends Controller {

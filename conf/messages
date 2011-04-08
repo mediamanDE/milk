@@ -3,3 +3,5 @@
 #
 validation.required=%s is required
 messageText = A Message Text
+displayname = A Displayname
+fullname = A Fullname 
