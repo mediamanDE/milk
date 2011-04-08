@@ -8,8 +8,8 @@ public class User extends Controller {
 		render(username);
 	}
 	
-	public static void edit() {
-		render();
+	public static void edit(String username) {
+		render(username);
 	}
 	
 
