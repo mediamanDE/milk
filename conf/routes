@@ -3,10 +3,22 @@
 # ~~~~
 
 # Home page
-GET     /					Application.index
+GET     /                                   		Application.index
+GET		/{username}									User.profile
+GET		/{username}/edit							User.edit
+
+GET		/group/										Group.overview
+GET		/group/{groupname}							Group.timeline
+GET		/group/{groupname}/edit						Group.edit
+GET		/group/create/								Group.create
+
+
+GET		/search/										Search.search
+
+GET		/thread/{threadID}							Thread.conversation
 
 # Map static resources from the /app/public folder to the /public path
-GET     /public/			staticDir:public
+GET     /public/                                staticDir:public
 
 # Catch all
 *       /{controller}/{action}                  {controller}.{action}
