@@ -2,13 +2,14 @@
 	
 	<property file="milk/local.properties" />
 
-	<property name="play.home" location="/opt/play-1.1.1" />
+	<property name="play.home" value="/opt/play-1.1.1" />
+	<property name="dist.dir" value="${basedir}/milk-dist" />
 	<property name="app.dir" location="${basedir}/${ant.project.name}" />
-	<property name="dist.dir" location="${basedir}/milk-dist" />
 	<property name="war.file" location="${dist.dir}/${ant.project.name}" />
 	
 	<target name="build-play-war">
         <mkdir dir="${dist.dir}" />
+		<echo>${play.home}</echo>
 		<exec dir="${play.home}" executable="play" vmlauncher="false">
 			<arg value="war"/>
 			<arg value="${app.dir}" />
