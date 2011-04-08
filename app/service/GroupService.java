@@ -2,7 +2,7 @@ package service;
 
 import models.Group;
 
-class GroupService {
+public class GroupService {
 	
 	public Group[] getGroups(){
 		return null;
