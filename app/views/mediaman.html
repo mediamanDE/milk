@@ -1,4 +1,3 @@
-#{set nickname:'juggler' /}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,7 +35,8 @@
     </form>
     <ul>
       <li><a href="/">Home</a></li>
-      <li><a href="/#{get 'nickname' /}/">My Profile</a></li>
+      <li><a href="/#{get 'nickname' /}">My Profile</a></li>
+      <li><a href="/#{get 'nickname' /}/edit">Edit Profile</a></li>
       <li><a href="/group/">Groups</a></li>
     </ul>
   </div>
