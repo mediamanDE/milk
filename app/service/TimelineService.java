@@ -13,17 +13,25 @@ public class TimelineService {
     private static IMessageDao messageDao = new MessageDaoImpl();
 
     /**
-     * retrieve all Messages.
+     *
+     * @param orderBy ASC, DESC
+     * @return
+     */
+    public static List<Message> getAllMessages(String orderBy) {
+
+        List<Message> messagesArray = new ArrayList<Message>();
+        messagesArray = messageDao.getAllMessages(orderBy);
+            
+        return messagesArray;
+
+    }
+
+    /**
      *
      * @return
      */
     public static List<Message> getAllMessages() {
-
-        List<Message> messagesArray = new ArrayList<Message>();
-        messagesArray = messageDao.getAllMessages();
-            
-        return messagesArray;
-
+        return getAllMessages("DESC");
     }
 
     /**
@@ -35,7 +43,7 @@ public class TimelineService {
     public static List<Message> getAllMessagesByGroup(Group group) {
 
         // Todo: Implement group functionalities
-        return getAllMessages();
+        return getAllMessages("DESC");
 
     }
 }

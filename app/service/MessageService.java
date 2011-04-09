@@ -17,6 +17,7 @@ public class MessageService{
 			message.setMessagetext("");
 			if( getMessageById(message.getId()) != null ){
 				messageDao.store(message);
+                                solr.Delete.deleteMessage(message);
 			} else {
 				//TODO throw new exception (message does not exist)
 			}
@@ -25,5 +26,6 @@ public class MessageService{
 	
 	public static void storeMessage (Message message){
 		messageDao.store(message);
+                solr.Add.addMessage(message);
 	}
 }

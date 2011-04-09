@@ -36,7 +36,7 @@ public interface IMessageDao {
      * Get All Messages
      * @return
      */
-    public List<Message> getAllMessages();
+    public List<Message> getAllMessages(String orderBy);
 
     /**
      * Get All Messages by Group
