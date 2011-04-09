@@ -3,6 +3,8 @@ package persistence.dao;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.httpclient.methods.GetMethod;
+
 import models.ExternalLink;
 import models.Message;
 import models.User;
@@ -10,6 +12,8 @@ import persistence.dao.api.IMessageDao;
 import persistence.dao.api.IUserDao;
 import persistence.dao.impl.MessageDaoImpl;
 import persistence.dao.impl.UserDaoImpl;
+import service.MessageService;
+import service.TimelineService;
 
 public class DaoTest {
 
@@ -17,12 +21,12 @@ public class DaoTest {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		String openId = "111213";
+		String openId = "345";
 		IUserDao userDao = new UserDaoImpl();
 		User user = userDao.getByOpenId(openId);
 		if (user == null) {
 			System.out.println("Didn't find user by openid=" + openId + ". Creating user ...");
-
+		
 			User userNew = new User();
 			userNew.setOpenId(openId);
 			userNew.setAvatarUrl("www.mediaman.de");
@@ -32,49 +36,47 @@ public class DaoTest {
 			userNew.setPostCount(0);
 			userNew.setTimezone("+1");
 			
-			ExternalLink extLnk1 = new ExternalLink();
-			extLnk1.setName("Facebook");
-			extLnk1.setUrl("www.facebook.com");
-			
-			ExternalLink extLnk2 = new ExternalLink();
-			extLnk2.setName("Twitter");
-			extLnk2.setUrl("www.twitter.com");
-			
-			List<ExternalLink> externalLinks = new ArrayList<ExternalLink>();
-			externalLinks.add(extLnk1);
-			externalLinks.add(extLnk2);
-			
-			userNew.setExternalLinks(externalLinks);
-
 			userDao.store(userNew);
 		} else {
 			System.out.println("User found.");
 		}
-//
-//		IMessageDao messageDao = new MessageDaoImpl();
-////		Message message = messageDao.getMessageById("4da028a3c37b31bcb0f6628e");
-//		List<Message> messages = messageDao.getAllMessages();
-//		if(messages != null){
-//			for(Message message : messages){
-//				if(message != null){
-//					message.debug();
-//				}else{
-//					System.out.println("message empty");
-//				}
-//			}
-//		}else{
-//			System.out.println("no messages");
-//		}
-//		
-////		if(user != null){
-////			IMessageDao messageDao = new MessageDaoImpl();
-////			
-////			Message messageNew = new Message();
-////			messageNew.setFrom(user);
-////			messageNew.setMessagetext("Hallo, wie kann ich eine Message in Mongo abspeichern?");
-////			
-////			messageDao.store(messageNew);
-////			messageNew.debug();
-////		}
+
+//		Message message = messageDao.getMessageById("4da028a3c37b31bcb0f6628e");
+		List<Message> messages = TimelineService.getAllMessages();
+		if(messages != null){
+			for(Message message : messages){
+				if(message != null){
+					message.debug();
+				}else{
+					System.out.println("message empty");
+				}
+			}
+		}else{
+			System.out.println("no messages");
+		}
+		
+		if(user != null){
+			
+			Message messageNew = new Message();
+			messageNew.setFrom(user);
+			messageNew.setMessagetext("Hallo, wie kann ich eine Message in Mongo abspeichern?");
+			
+			MessageService.storeMessage(messageNew);
+//			messageNew.debug();
+
+			Message messageNew2 = new Message();
+			messageNew2.setFrom(user);
+			messageNew2.setMessagetext("Ja ganz einfach mit store =)");
+
+			MessageService.storeMessage(messageNew2, MessageService.getMessageById("4da07c28c5c5efa416f33614"));
+//			messageNew2.debug();
+
+			Message messageNew3 = new Message();
+			messageNew3.setFrom(user);
+			messageNew3.setMessagetext("Ach soo. Danke!");
+
+			MessageService.storeMessage(messageNew3, MessageService.getMessageById("4da07c28c5c5efa416f33614"));
+//			messageNew3.debug();
+		}
 	}
 }
