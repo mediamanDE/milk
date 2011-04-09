@@ -1,3 +1,4 @@
+import play.Logger;
 import play.Play;
 import play.jobs.Job;
 import play.jobs.OnApplicationStart;
@@ -12,6 +13,7 @@ public class Bootstrap extends Job {
 		if ( "prod".equals(appMode) ) {
 			Play.ctxPath = Play.configuration.getProperty("context.path", "/milk");
 			Router.load(Play.ctxPath);
+			Logger.debug("Set ContextPath to %s", Play.ctxPath);
 		}
 	}
 }

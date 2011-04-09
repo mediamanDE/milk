@@ -7,6 +7,7 @@ import play.libs.OpenID.UserInfo;
 import service.UserService;
 import models.User;
 
+@With(Authentication.class)
 public class Register extends Controller {
 
 	public static void register() {
