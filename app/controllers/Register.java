@@ -7,25 +7,27 @@ import play.libs.OpenID.UserInfo;
 import models.User;
 
 public class Register extends Controller {
-	public void register(){
-		
+
+	public static void register() {
+		render();
 	}
-	
-	public void currentFields(){
-		
-	} 
-	public void saveFileds(String fullname, String displayname){
-		
+
+	public void currentFields() {
+
+	}
+
+	public void saveFileds(String fullname, String displayname) {
+
 		validation.required(fullname);
 		validation.required(displayname);
-		
-		if(validation.hasErrors()){
-			for(play.data.validation.Error error : validation.errors()) {
-	             flash.error(error.message());
-	        }
+
+		if (validation.hasErrors()) {
+			for (play.data.validation.Error error : validation.errors()) {
+				flash.error(error.message());
+			}
 			register();
-		}else{
-			if(fullname != "" && displayname != ""){
+		} else {
+			if (fullname != "" && displayname != "") {
 				User newuser = new User();
 				UserInfo verifiedUser = OpenID.getVerifiedID();
 				String Nickname = verifiedUser.id;
