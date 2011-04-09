@@ -4,11 +4,11 @@ import models.Group;
 
 public class GroupService {
 	
-	public Group[] getGroups(){
+	public static Group[] getGroups(){
 		return null;
 	}
 	
-	public void storeGroup(Group group){
+	public static void storeGroup(Group group){
 		
 	}
 }

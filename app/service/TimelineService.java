@@ -1,15 +1,17 @@
 package service;
 
+import java.util.List;
+
 import models.Group;
 import models.Message;
 
 public class TimelineService {
 
-	public Message[] getAllMessages(){
+	public static List<Message> getAllMessages(){
 		return null;
 	}
 	
-	public Message[] getAllMessagesByGroup(Group group){
+	public static List<Message> getAllMessagesByGroup(Group group){
 		return null;
 	}
 }

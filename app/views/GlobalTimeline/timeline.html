@@ -1,7 +1,7 @@
 #{extends '/Template/mediaman.html' /}
 #{set title:"Global Timeline"  /}
 
-<form action="@{sendMessage}" method="POST">
+<form action="@{sendMessage()}" method="POST">
     <label for="user">Enter your Message :</label>
     <input type="text" name="messageText" id="messageText" /></br>
     <label for="groups">Enter the Message Groups :</label>
@@ -13,18 +13,18 @@
 	<h2>${flash.error}</h2>
 #{/if}
 
-#{list items:message, as:'entity'}
+#{list items:currentMessages, as:'entity'}
         <div class="message">
             <div class="message-text">
-            	${entity.messagetext}
+            	${entity.getMessagetext()}
             </div>
             
             <div class="message-metadata">
                 <span class="message-author">
-                        ${entity.from}
+                        
                 </span>
                 <span class="message-date">
-                        ${entity.from}
+                        
                 </span>
                 <div class="message-groups">
                         

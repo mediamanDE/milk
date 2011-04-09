@@ -1,18 +1,18 @@
 package service;
 
 import models.User;
+import persistence.dao.api.IUserDao;
+import persistence.dao.impl.UserDaoImpl;
 
 public class UserService {
 	
-	public User getUserByOpenId(final String openId){
-		User user = new User();
-		user.setOpenId(openId);
-		//TODO 
-		user.setDisplayname("Hans Peter");
-		return user;
+	private static IUserDao userDao = new UserDaoImpl();
+
+	public static User getUserByOpenId(final String openId) {
+		return userDao.getByOpenId(openId);
 	}
-	
-	public void storeUser(User user){
-		
+
+	public static void storeUser(User user){
+		userDao.store(user);
 	}
 }
