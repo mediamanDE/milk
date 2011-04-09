@@ -22,6 +22,7 @@
 <div class="container_24">
   <div class="grid_24 box header">&nbsp;</div>
   
+#{if session.get(controllers.Authentication.USER_ID)}
   <div class="grid_5 block box">
   <form id="quick-search" class="quick-search" method="get" action="@{search.search()}">
         <fieldset>
@@ -39,8 +40,9 @@
       <li><a href="@{User.profile(nickname)}">My Profile</a></li>
       <li><a href="@{User.edit(nickname)}">Edit Profile</a></li>
       <li><a href="@{Authentication.logout()}">Logout</a></li>
-    </ul>
+    </ul>    
   </div>
+ #{/if}
  
  
   <div class="grid_19 contents box">
