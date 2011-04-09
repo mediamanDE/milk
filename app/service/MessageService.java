@@ -35,19 +35,19 @@ public class MessageService{
 		if(message != null){
 			if(parentMessage != null){
 				try{
-					List<Message> parentAncestors = parentMessage.getAncestors();
-					List<Message> ancestores = new ArrayList();
+					List<String> parentAncestors = parentMessage.getAncestors();
+					List<String> ancestores = new ArrayList();
 					if(parentAncestors != null){
 						ancestores.addAll(parentAncestors);
 					}
-					ancestores.add(parentMessage);
+					ancestores.add(parentMessage.getId());
 					message.setAncestors(ancestores);
 				}catch(Exception e){
 					e.printStackTrace();
 				}
 			}
 			messageDao.store(message);
-			solr.Add.addMessage(message);
+//			solr.Add.addMessage(message);
 		}
 	}
 }

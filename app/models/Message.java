@@ -3,11 +3,13 @@ package models;
 import java.util.Date;
 import java.util.List;
 
+import service.MessageService;
+
 public class Message {
     private String id;
     private Date postdate;
     private List<Group> groups;
-    private List<Message> ancestors;
+    private List<String> ancestorIds;
     private String messagetext;
     private User from;
 
@@ -28,9 +30,9 @@ public class Message {
 		System.out.println("   ]");
 
 		System.out.println("ancestors = \n   [");
-		int numAncestors = (ancestors != null) ? ancestors.size() : 0;
+		int numAncestors = (ancestorIds != null) ? ancestorIds.size() : 0;
 		for (int i = 0; i < numAncestors; i++) {
-			Message msg = ancestors.get(i);
+			Message msg = MessageService.getMessageById(ancestorIds.get(i));
 			System.out.println("      [_id = " + msg.getId() + " | postdate = " + msg.getPostdate() + "]");
 		}
 		System.out.println("   ]");
@@ -84,14 +86,14 @@ public class Message {
 	/**
 	 * @return the ancestors
 	 */
-	public List<Message> getAncestors() {
-		return ancestors;
+	public List<String> getAncestors() {
+		return ancestorIds;
 	}
 	/**
 	 * @param ancestors the ancestors to set
 	 */
-	public void setAncestors(List<Message> ancestors) {
-		this.ancestors = ancestors;
+	public void setAncestors(List<String> ancestors) {
+		this.ancestorIds = ancestors;
 	}
 	/**
 	 * @return the messagetext
