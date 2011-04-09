@@ -1,0 +1,20 @@
+#{extends 'baseframe.html' /}
+#{extends 'main.html' /}
+#{set title:'milk - Register' /}
+
+
+<center>
+	<h1>Register your milk account!</h1>
+	<form action="@{saveUser()}" method="POST">
+	    <label for="fullname">Fullname</label>
+	    <input type="text" name="fullname" id="fullname" /><br />
+	    <label for="displayname">Displayname</label>
+	    <input type="text" name="displayname" id="displayname" /><br />
+	    <input type="submit" value="register meeee...." />
+	</form>
+	
+	#{if flash.error}
+	<h2>${flash.error}</h2>
+	#{/if}
+</center>
+
