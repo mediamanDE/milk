@@ -1,7 +1,7 @@
 package solr;
 
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.List;
 
 import models.Group;
 import models.Message;
@@ -15,17 +15,19 @@ import org.apache.solr.common.SolrDocumentList;
 
 public class Search {
 
-	public static ArrayList<Message> QueryMessage(SolrQuery query){
+	public static List<Message> QueryMessage(SolrQuery query){
 		SolrDocumentList solrDocs = queryFromServer(query).getResults();
-		ArrayList<Message> listMessage = new ArrayList<Message>(); 
+		List<Message> listMessage = new ArrayList<Message>(); 
 		for (SolrDocument solrDocument : solrDocs) {
 			listMessage.add(getCleanMessage(solrDocument));
 		}
 		return listMessage;
 	}
 	
-	public static ArrayList<Message> SearchMessageAll(String search,boolean LazySearch){
+	public static List<Message> SearchMessageAll(String search,boolean LazySearch){
 		SolrQuery query = new SolrQuery();
+		
+		
 		
 		//????
     //query.setQuery("*:" + search);
@@ -49,7 +51,7 @@ public class Search {
     
     SolrDocumentList solrDocs = queryFromServer(query).getResults();
     
-		ArrayList<Message> listMessage = new ArrayList<Message>(); 
+		List<Message> listMessage = new ArrayList<Message>(); 
 		for (SolrDocument solrDocument : solrDocs) {
 			listMessage.add(getCleanMessage(solrDocument));
 		}

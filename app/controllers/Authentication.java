@@ -1,10 +1,10 @@
 package controllers;
 
-import play.data.validation.Required;
 import play.libs.OpenID;
 import play.libs.OpenID.UserInfo;
 import play.mvc.Before;
 import play.mvc.Controller;
+import service.UserService;
 
 public class Authentication extends Controller {
 	
@@ -38,7 +38,15 @@ public class Authentication extends Controller {
 	            login();
 	        } 
 	        session.put("user", verifiedUser.id);
-            redirect("/");
+
+	        UserService userdata = new UserService();
+	        models.User theuser = userdata.getUserByOpenId(verifiedUser.id);
+	        if(theuser.getDisplayname() == null){
+	        	redirect("/register/");
+	        }else{
+	        	redirect("/");
+	        }
+            
 	    } else {
 	        if(!OpenID.id(user).verify()) { // will redirect the user
 	            flash.error("Cannot verify your OpenID");

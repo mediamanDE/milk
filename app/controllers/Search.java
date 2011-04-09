@@ -25,6 +25,7 @@ public class Search extends Controller {
 		
 		
 		List<Message> currentMessages = solr.Search.SearchMessageAll("is", false);
+		
 		render(currentMessages);
 		
 		//render();
