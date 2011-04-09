@@ -1,14 +1,18 @@
 package persistence.dao.impl;
 
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
+import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 
+import models.ExternalLink;
 import models.User;
 import persistence.dao.api.IUserDao;
 
@@ -23,13 +27,31 @@ public class UserDaoImpl extends BaseDao implements IUserDao {
 
 		mongoUser.put(FIELD_USER_AVATARURL, user.getAvatarUrl());
 		mongoUser.put(FIELD_USER_DISPLAYNAME, user.getDisplayname());
-		//TODO implement subobject
-		//	mongoUser.put(FIELD_USER_EXTERNALLINKS, user.get);
 		mongoUser.put(FIELD_USER_FULLNAME, user.getFullname());
 		mongoUser.put(FIELD_USER_NICKNAME, user.getNickname());
 		mongoUser.put(FIELD_USER_OPENID, user.getOpenId());
 		mongoUser.put(FIELD_USER_POSTCOUNT, user.getPostCount());
 		mongoUser.put(FIELD_USER_TIMEZONE, user.getTimezone());
+
+		// store external links
+		List<ExternalLink> externalLinks = user.getExternalLinks();
+		int sizeExternalLinks = (externalLinks != null) ? externalLinks.size() : 0;
+		if (sizeExternalLinks > 0) {
+			
+			DBObject list = new BasicDBList();
+			
+			for (int i = 0; i < sizeExternalLinks; i++) {
+
+				ExternalLink extlnk = externalLinks.get(i);
+				BasicDBObject dbExtLnk = new BasicDBObject();
+				dbExtLnk.put(FIELD_USER_EXTERNALLINKS_NAME, extlnk.getName());
+				dbExtLnk.put(FIELD_USER_EXTERNALLINKS_URL, extlnk.getUrl());
+				
+				list.put(String.valueOf(i), dbExtLnk);
+			}
+			
+			mongoUser.put(FIELD_USER_EXTERNALLINKS, list);
+		}
 
         coll.insert(mongoUser);
 	}
@@ -62,7 +84,26 @@ public class UserDaoImpl extends BaseDao implements IUserDao {
 			returnUser.setOpenId((String) resultMap.get(FIELD_USER_OPENID));
 			returnUser.setPostCount((Integer) resultMap.get(FIELD_USER_POSTCOUNT));
 			returnUser.setTimezone((String) resultMap.get(FIELD_USER_TIMEZONE));
-
+			
+			BasicDBList list = (BasicDBList) resultMap.get(FIELD_USER_EXTERNALLINKS);
+			int sizeExternalLinks = (list != null) ? list.size() : 0;
+			if (sizeExternalLinks > 0) {
+				
+				List<ExternalLink> externalLinks = new ArrayList<ExternalLink>(sizeExternalLinks);
+				
+				for (int i = 0; i < sizeExternalLinks; i++) {
+					BasicDBObject dbExtLnk = (BasicDBObject) list.get(i);
+					
+					ExternalLink newExtLnk = new ExternalLink();
+					newExtLnk.setName(dbExtLnk.getString(FIELD_USER_EXTERNALLINKS_NAME));
+					newExtLnk.setUrl(dbExtLnk.getString(FIELD_USER_EXTERNALLINKS_URL));
+					
+					externalLinks.add(newExtLnk);
+				}
+				
+				returnUser.setExternalLinks(externalLinks);
+			}
+			
 			returnUser.debug();
 		}
 		return returnUser;
