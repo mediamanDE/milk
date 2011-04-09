@@ -29,8 +29,10 @@ public class Authentication extends Controller {
 	}
 	
 	public static void authenticate(String user) {
+		
 		if(OpenID.isAuthenticationResponse()) {
 	        UserInfo verifiedUser = OpenID.getVerifiedID();
+	        
 	        if(verifiedUser == null) {
 	            flash.error("Oops. Authentication has failed");
 	            login();

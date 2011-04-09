@@ -1,2 +1,12 @@
 #{extends 'main.html' /}
 #{set title:"Search" /}
+
+
+
+
+#{list items:Message, as:'entity'}
+   <div class="message-text">
+   	${entity.messagetext}
+   </div>
+
+#{/list}
