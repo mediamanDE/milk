@@ -8,6 +8,8 @@ import service.UserService;
 
 public class Authentication extends Controller {
 	
+	public static final String USER_ID = "UserID";
+	
 	@Before(unless={"login", "authenticateOpenID"})
 	public static void checkAuthenticated() {
 	    if(!session.contains("user")) {
@@ -31,19 +33,15 @@ public class Authentication extends Controller {
 	public static void authenticateOpenID(String openID) {
 		if(OpenID.isAuthenticationResponse()) {
 	        UserInfo verifiedUser = OpenID.getVerifiedID();
-	        
 	        if(verifiedUser == null) {
 	            flash.error("Oops. Authentication has failed");
 	            login();
 	        } 
-	        session.put("user", verifiedUser.id);
-
-	        UserService userdata = new UserService();
-	        models.User theuser = userdata.getUserByOpenId(verifiedUser.id);
-	        if(theuser == null){
+	        if(UserService.getUserByOpenId(verifiedUser.id) == null){
 	        	redirect("/register/");
 	        }else{
-	        	redirect("/");
+	        	session.put(USER_ID, verifiedUser.id);
+		        redirect("/");
 	        }
 	    } else {
 	        if(!OpenID.id(openID).verify()) { // will redirect the user
