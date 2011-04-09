@@ -12,6 +12,7 @@ public class Group {
                 + "id = " + id + ",\n"
                 + "name = " + name + ",\n"
                 + "description = " + description);
+        System.out.println("]");
     }
 
 	/**
