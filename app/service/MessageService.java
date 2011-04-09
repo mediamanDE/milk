@@ -1,5 +1,8 @@
 package service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import models.Message;
 import persistence.dao.api.IMessageDao;
 import persistence.dao.impl.MessageDaoImpl;
@@ -25,7 +28,26 @@ public class MessageService{
 	}
 	
 	public static void storeMessage (Message message){
-		messageDao.store(message);
-                solr.Add.addMessage(message);
+		storeMessage(message, null);
+	}
+	
+	public static void storeMessage(Message message, Message parentMessage){
+		if(message != null){
+			if(parentMessage != null){
+				try{
+					List<Message> parentAncestors = parentMessage.getAncestors();
+					List<Message> ancestores = new ArrayList();
+					if(parentAncestors != null){
+						ancestores.addAll(parentAncestors);
+					}
+					ancestores.add(parentMessage);
+					message.setAncestors(ancestores);
+				}catch(Exception e){
+					e.printStackTrace();
+				}
+			}
+			messageDao.store(message);
+			solr.Add.addMessage(message);
+		}
 	}
 }
