@@ -1,0 +1,61 @@
+body {
+  background: #444 url(/public/img/cow.jpg) no-repeat bottom right;
+  color: #FFF;
+  font-size: 1em;
+  height: auto;
+  padding-bottom: 2%;
+}
+
+a {
+  color: #fff;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+h1 {
+  font-family: Georgia, serif;
+  font-weight: normal;
+  padding-top: 2%;
+  text-align: center;
+}
+
+h2 {
+  padding-top: 2%;
+  text-align: center;
+}
+
+p {
+  border: 1px solid #666;
+  overflow: hidden;
+  padding: 1px 0;
+  text-align: center;
+}
+
+.container_12,
+.container_16,
+.container_24 { 
+  margin-bottom: 20px;
+}
+
+.container_12 {
+}
+
+.container_16 {
+}
+
+.container_24{
+
+}
+.block{
+	background-color: #d8e7ee;
+	color:#85aec1;
+}
+
+.contents{
+	background-color: #85aec1;
+	color:#444;
+
+}

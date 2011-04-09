@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="imagetoolbar" content="false" />
+<meta name="viewport" content="width=320; initial-scale=1.0; maximum-scale=1.0; user-scalable=0;"/>
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<link rel="apple-touch-startup-image" href="startup.png" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="format-detection" content="telephone=no" />
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>#{get 'title' /}</title>
+<link href="http://fonts.googleapis.com/css?family=Droid+Sans:regular,bold" rel="stylesheet" type="text/css" >
+<link rel="stylesheet" href="/public/css/reset.css" />
+<link rel="stylesheet" href="/public/css/text.css" />
+<link rel="stylesheet" href="/public/css/960_24_col.css" />
+<link rel="stylesheet" href="/public/css/demo.css" />
+#{get 'moreStyles' /}
+<script src="@{'/public/javascripts/jquery-1.4.2.min.js'}" type="text/javascript" charset="utf-8"></script>
+#{get 'moreScripts' /}
+</head>
+<body>
+<div class="container_24">
+
+  <div class="grid_5 block"> Nav </div>
+  <div class="grid_19 contents">
+    <h1>#{get 'title' /}</h1>
+    #{doLayout /} </div>
+  <div class="clear"></div>
+</div>
+</body>
+</html>
