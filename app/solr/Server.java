@@ -5,6 +5,9 @@ import java.net.MalformedURLException;
 import org.apache.solr.client.solrj.SolrServer;
 import org.apache.solr.client.solrj.impl.CommonsHttpSolrServer;
 
+import play.Logger;
+import play.Play;
+
 import com.sun.xml.internal.ws.wsdl.writer.UsingAddressing;
 
 /*
@@ -26,7 +29,6 @@ public class Server {
 	private static Server serverInstance = null;
 	private static Boolean created = false;
 	
-	//private String url = "http://ws202-1.mediaman.local:8983/solr";
 	private String url = "http://10.15.20.65:8983/solr";
 	
 	private SolrServer server;
@@ -36,6 +38,12 @@ public class Server {
 	}
 	
 	private static Server getServerInstance() {
+		Boolean enabled = Boolean.valueOf(Play.configuration.getProperty("milk.solr.enabled", "false"));
+		if ( !enabled ) {
+			Logger.info("Tried to access Solr server, while it's disabled");
+			return null;
+		}
+		
 		if (!created) {
 			synchronized(Server.class) {
 				if(!created) {
@@ -44,7 +52,7 @@ public class Server {
 						try {
 							serverInstance.server = new CommonsHttpSolrServer(serverInstance.url);
 						} catch (MalformedURLException e) {
-							// TODO 
+							Logger.error(e, "URL for Solr server is invalid");
 						}
 					}
 					created = true;
@@ -54,55 +62,11 @@ public class Server {
 		return serverInstance;
 	}
 	
-	
-	
-	/* STATIC - VERSION	
-	 * URL Kann vorher gesetzt werden...
-
- 	private static String url = "http://ws202-1.mediaman.local:8983/solr";
-	private static SolrServer server;
-	
-	*//**
-	 * @param solr url to set
-	 *//*
-	public static void setUrl(String url) {
-	 Server.url = url;
-	 }
-	*//**
-	 * @return solr url
-	 *//*
-	public static String getUrl() {
-		return Server.url;
-	}
-	
-	*//**
-	 * @return solr Server
-	 *//*
-	public static SolrServer getServer() {
-		if(server == null){
-			try {
-				server = new CommonsHttpSolrServer(url);
-	
-				CommonsHttpSolrServer server = new CommonsHttpSolrServer(url);
-				server.setSoTimeout(1000);  // socket read timeout
-				server.setConnectionTimeout(100);
-				server.setDefaultMaxConnectionsPerHost(100);
-				server.setMaxTotalConnections(100);
-				server.setFollowRedirects(false);  // defaults to false
-				// allowCompression defaults to false.
-				// Server side must support gzip or deflate for this to have any effect.
-				server.setAllowCompression(true);
-				server.setMaxRetries(1); // defaults to 0.  > 1 not recommended.
-				server.setParser(new XMLResponseParser()); // binary parser is used by default
-			} catch (MalformedURLException e) {
-				// TODO 
-			}
+	private Server() {
+		String url = Play.configuration.getProperty("milk.solr.url");
+		if ( url != null && "".equals(url) ) {
+			this.url = url;
 		}
-		return Server.server;
 	}
-	*/
-	
-	
-	private Server(){}
 	
 }
