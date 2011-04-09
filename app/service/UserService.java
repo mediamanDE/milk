@@ -6,17 +6,13 @@ import persistence.dao.impl.UserDaoImpl;
 
 public class UserService {
 	
-	private IUserDao userDao;
+	private static IUserDao userDao = new UserDaoImpl();
 
-	public UserService() {
-		userDao = new UserDaoImpl();
-	}
-	
-	public User getUserByOpenId(final String openId) {
+	public static User getUserByOpenId(final String openId) {
 		return userDao.getByOpenId(openId);
 	}
 
-	public void storeUser(User user){
+	public static void storeUser(User user){
 		userDao.store(user);
 	}
 }

@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 public class Message {
-    private int _id;
+    private String _id;
     private Date postdate;
     private List<Group> groups;
     private List<Message> ancestors;
@@ -14,13 +14,13 @@ public class Message {
 	/**
 	 * @return the _id
 	 */
-	public int get_id() {
+	public String get_id() {
 		return _id;
 	}
 	/**
 	 * @param _id the _id to set
 	 */
-	public void set_id(int _id) {
+	public void set_id(String _id) {
 		this._id = _id;
 	}
 	/**
