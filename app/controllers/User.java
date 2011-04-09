@@ -24,9 +24,24 @@ public class User extends Controller {
 		render(username,currentUser);
 	}
 	
-	public static void saveChanges(){
+	public static void saveChanges(String avatarURL,String displayname,String fullname, String nickname){
 		
-		//profile();
+		models.User currentUser = UserService.getUserByOpenId(session.get(Authentication.USER_ID));
+		
+		if(currentUser != null){
+			currentUser.setAvatarUrl(avatarURL);
+			currentUser.setDisplayname(displayname);
+			currentUser.setFullname(fullname);
+			currentUser.setNickname(nickname);
+			
+			UserService.storeUser(currentUser);
+			
+			redirect("/"+currentUser.getDisplayname()+"/edit");
+		}else{
+			
+			//ToDo
+		}
+		
 	}
 
 	public static void sendMessage(String messageText, String messageGroups) {
