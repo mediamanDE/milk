@@ -79,11 +79,11 @@ public class MessageDaoImpl extends BaseDao implements IMessageDao {
     @Override
     public List<Message> getAllMessages() {
 
+        String messageId = null;
         List<Message> messagesArray = new ArrayList<Message>();
 
         DB db = getDatabase();
         DBCollection coll = db.getCollection(COLLECTION_MESSAGES);
-        DBObject result;
 
         BasicDBObject query = new BasicDBObject();
         BasicDBObject field = new BasicDBObject();
@@ -99,8 +99,13 @@ public class MessageDaoImpl extends BaseDao implements IMessageDao {
             BasicDBObject obj = (BasicDBObject) cursor.next();
 
             Message myMessage = new Message();
-            myMessage = getMessageById((String) obj.getString(FIELD_MESSAGE_ID));
-            messagesArray.add(myMessage);
+            messageId = obj.getString(FIELD_MESSAGE_ID);
+
+            myMessage = getMessageById(messageId);
+            
+            if (null != myMessage) {
+                messagesArray.add(myMessage);
+            }
 
         }
 
