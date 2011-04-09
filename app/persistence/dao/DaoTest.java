@@ -1,7 +1,10 @@
 package persistence.dao;
 
+import models.Message;
 import models.User;
+import persistence.dao.api.IMessageDao;
 import persistence.dao.api.IUserDao;
+import persistence.dao.impl.MessageDaoImpl;
 import persistence.dao.impl.UserDaoImpl;
 
 public class DaoTest {
@@ -29,6 +32,15 @@ public class DaoTest {
 		} else {
 			System.out.println("User found.");
 		}
+		
+		if(user != null){
+			IMessageDao messageDao = new MessageDaoImpl();
+			
+			Message messageNew = new Message();
+			messageNew.setFrom(user);
+			messageNew.setMessagetext("Hallo, wie kann ich eine Message in Mongo abspeichern?");
+			
+			messageDao.store(messageNew);
+		}
 	}
-
 }

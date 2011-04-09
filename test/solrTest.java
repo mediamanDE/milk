@@ -16,7 +16,7 @@ public class solrTest extends UnitTest {
     public void TestAddSearchDelete() {
     	
     	Message messageTest = new Message();
-    	int ID = new Random().nextInt();
+    	String ID = Integer.toString(new Random().nextInt());
     	
     	// Verbesserung zu GUID
     	messageTest.setId(ID);

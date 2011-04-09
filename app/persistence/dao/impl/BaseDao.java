@@ -2,6 +2,8 @@ package persistence.dao.impl;
 
 import java.net.UnknownHostException;
 
+import play.Play;
+
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
@@ -19,50 +21,36 @@ public class BaseDao implements IDBConstants {
 	
 	protected synchronized void init() {
 		if (mongo == null) {
+			
+			String databaseHost = DEFAULT_DATABASE_HOST;
+			String databasePort = String.valueOf(DEFAULT_DATABASE_PORT);
 			try {
-				mongo = new Mongo( DATABASE_HOST , DATABASE_PORT );
+				databaseHost = Play.configuration.getProperty(CFG_KEY_DATABASE_HOST, DEFAULT_DATABASE_HOST);
+				databasePort = Play.configuration.getProperty(CFG_KEY_DATABASE_PORT, String.valueOf(DEFAULT_DATABASE_PORT));
 				
+			} catch (Exception e) {
+				System.err.println("WARNING: Retrieving properties \"" + CFG_KEY_DATABASE_HOST + "\", \"" + CFG_KEY_DATABASE_PORT + "\" failed");
+			}
+
+			try {
+				mongo = new Mongo(databaseHost, Integer.parseInt(databasePort));
+
+			} catch (NumberFormatException nfe) {
+				System.err.println("ERROR: Setting database port " + databasePort + "failed");
+				nfe.printStackTrace();
 			} catch (UnknownHostException uhe) {
+				System.err.println("ERROR: Unknown host " + databaseHost);
 				uhe.printStackTrace();
 			} catch (MongoException me) {
+				System.err.println("ERROR: Connecting to database (" + databaseHost + ":" + databasePort + " failed.");
 				me.printStackTrace();
 			}
 		}
 	}
 
 	protected DB getDatabase() {
-		DB db = mongo.getDB(DATABASE_NAME);
+		DB db = mongo.getDB(DEFAULT_DATABASE_NAME);
 		return db;
-	}
-	
-	public void testInsert() {
-		
-		DB db = getDatabase();
-		DBCollection coll = db.getCollection("testCollection");
-		
-		BasicDBObject doc = new BasicDBObject();
-
-        doc.put("name", "MongoDB");
-        doc.put("type", "database");
-        doc.put("count", 1);
-
-        BasicDBObject info = new BasicDBObject();
-
-        info.put("x", 203);
-        info.put("y", 102);
-
-        doc.put("info", info);
-
-        coll.insert(doc);
-	}
-
-	public void testFind() {
-		
-		DB db = getDatabase();
-		DBCollection coll = db.getCollection("testCollection");
-		
-		DBObject myDoc = coll.findOne();
-		System.out.println(myDoc);
 	}
 
 }

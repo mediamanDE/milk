@@ -15,6 +15,7 @@
 #{/if}
 
 #{list items:currentMessages, as:'entity'}
+        <hr/>
         <div class="message">
             <div class="message-text">
             	${entity.getMessagetext()}
@@ -32,6 +33,7 @@
                 </div>
             </div>
         </div>
+        
 #{/list}
 
 

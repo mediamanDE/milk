@@ -1,0 +1,38 @@
+<project name="milk" basedir=".">
+	
+	<property file="local.properties" />
+    <property file="deploy.properties" />
+	
+	<path id="cp.deploy">
+	    <fileset dir="deploy">
+	        <include name="**/*.jar"/>
+    	</fileset>
+	</path>
+	
+    <taskdef name="deploy"    classname="org.apache.catalina.ant.DeployTask" classpathref="cp.deploy" />
+    <taskdef name="reload"    classname="org.apache.catalina.ant.ReloadTask" classpathref="cp.deploy" />
+    <taskdef name="undeploy"  classname="org.apache.catalina.ant.UndeployTask" classpathref="cp.deploy" />
+
+	<target name="reload-war">
+	    <reload url="${tomcat.manager.url}" 
+	    	    username="${tomcat.manager.username}" 
+	    	    password="${tomcat.manager.password}"
+		        path="${deploy.context.path}"/>
+	</target>
+
+    <target name="deploy-war">
+        <deploy url="${tomcat.manager.url}" 
+                username="${tomcat.manager.username}" 
+                password="${tomcat.manager.password}"
+                path="${deploy.context.path}"
+                war="${deploy.war.file}" />
+    </target>
+
+    <target name="undeploy-war">
+        <undeploy url="${tomcat.manager.url}" 
+                username="${tomcat.manager.username}" 
+                password="${tomcat.manager.password}"
+                path="${deploy.context.path}" />
+    </target>
+
+</project>
