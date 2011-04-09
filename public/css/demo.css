@@ -1,5 +1,5 @@
 body {
-	background: #444;
+	background: #444 url(/public/img/juggler_milk_darkblue.png) no-repeat bottom left;
 	color: #444;
 	font-size: 1em;
 	height: auto;
@@ -45,16 +45,23 @@ p {
 }
 .contents {
 /*	background-color: #85aec1;
-*/}
+*/
+	min-height:500px;
+	overflow:visible;
+}
 .box {
 	background-color: #fff;
 	-moz-box-shadow: 0 0 5px #888;
 	-webkit-box-shadow: 0 0 5px #888;
 	box-shadow: 0 0 5px #888;
 	padding: 2px 5px;
+	moz-border-radius: 10px;
+	border-radius: 10px;
 }
 .header {
 	margin-bottom:1%;
+	background:url('') top left;
+	min-height:
 }
 ul {
 	list-style:none;
@@ -69,12 +76,15 @@ ul {
 .block li a {
 	color:#444;
 }
-form {
+
+div.contents div, form{
 	background-color:#d8e7ee;
 	padding:5px;
 	-moz-box-shadow: 0 0 5px #85aec1;
 	-webkit-box-shadow: 0 0 5px #85aec1;
 	box-shadow: 0 0 5px #85aec1;
-	moz-border-radius-bottomright: 10px;
-	border-bottom-right-radius: 10px;
+	moz-border-radius: 10px;
+	border-radius: 10px;
+	margin-top:10px;
+
 }
