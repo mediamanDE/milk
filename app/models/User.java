@@ -11,7 +11,17 @@ public class User {
 	private int postCount;
 	private String timezone;
 	private List<ExternalLink> externalLinks;
-	
+
+	public void debug() {
+		System.out.println("avatarUrl = " + getAvatarUrl());
+		System.out.println("displayname = " + getDisplayname());
+		System.out.println("fullname = " + getFullname());
+		System.out.println("nickname = " + getNickname());
+		System.out.println("openId = " + getOpenId());
+		System.out.println("postCount = " + getPostCount());
+		System.out.println("timezone = " + getTimezone());
+	}
+
 	/**
 	 * @return the openId
 	 */

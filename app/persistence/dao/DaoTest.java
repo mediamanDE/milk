@@ -11,12 +11,23 @@ public class DaoTest {
 	 */
 	public static void main(String[] args) {
 		IUserDao userDao = new UserDaoImpl();
-		User user = userDao.getByOpenId("123");
-		if (user == null) System.out.println("User does not exist");
+		User user = userDao.getByOpenId("345");
+		if (user == null) {
+			System.out.println("User does not exist");
 		
-		User userNew = new User();
-		userNew.setOpenId("123");
-		userDao.store(userNew);
+			User userNew = new User();
+			userNew.setOpenId("345");
+			userNew.setAvatarUrl("www.mediaman.de");
+			userNew.setDisplayname("Harry");
+			userNew.setFullname("Harry Hirsch");
+			userNew.setNickname("Otto");
+			userNew.setPostCount(0);
+			userNew.setTimezone("+1");
+			
+			userDao.store(userNew);
+		} else {
+			System.out.println("User exists.");
+		}
 	}
 
 }
