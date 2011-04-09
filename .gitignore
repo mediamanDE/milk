@@ -1,4 +1,6 @@
 milk-dist
+milk.war
+milk/
 precompiled
 local.properties
 .DS_Store
