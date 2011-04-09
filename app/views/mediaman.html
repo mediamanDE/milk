@@ -21,11 +21,12 @@
 <body>
 <div class="container_24">
   <div class="grid_24 box header">&nbsp;</div>
+  
   <div class="grid_5 block box">
   <form id="quick-search" class="quick-search" method="get" action="@{search.search()}">
         <fieldset>
             <legend>Quick Search</legend>
-            <input class="quick-search-query" id="quick-search-query" type="search" accesskey="q" autocomplete="off" name="queryString" size="32" results="10" placeholder="Search">
+            <input class="quick-search-query" id="searchMessage" type="search" accesskey="q" autocomplete="off" name="searchMessage" size="32" results="10" placeholder="Search">
             <input class="quick-search-submit" id="quick-search-submit" type="submit" value="Search">
             <div class="aui-dd-parent quick-nav-drop-down"><!-- Quick nav appears here --></div>
         </fieldset>
@@ -40,6 +41,8 @@
       <li><a href="@{Authentication.logout()}">Logout</a></li>
     </ul>
   </div>
+ 
+ 
   <div class="grid_19 contents box">
     <h1>#{get 'title' /}</h1>
     #{doLayout /} </div>
