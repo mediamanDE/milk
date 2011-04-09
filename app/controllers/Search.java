@@ -1,33 +1,56 @@
 package controllers;
 
-import java.io.IOException;
-import java.net.MalformedURLException;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 import models.Message;
-
-import org.apache.solr.client.solrj.SolrServer;
-import org.apache.solr.client.solrj.SolrServerException;
-import org.apache.solr.client.solrj.impl.CommonsHttpSolrServer;
-import org.apache.solr.common.SolrInputDocument;
-
+import play.db.jpa.Model;
 import play.mvc.Controller;
 import play.mvc.With;
 
 @With(Authentication.class)
 public class Search extends Controller {
 	
-	public static void search(String messageText) {
+	public static void search(String searchMessage,String searchAuthor, String searchUser) {
 		//solr.Delete.deleteAll();
-		List<Message> currentMessages = solr.Search.SearchMessageAll(messageText, false);
-		render(currentMessages);
+		flash.error("");
+		
+		if(searchMessage != null){
+			List<Message> currentMessages = null; 
+			validation.required(searchMessage);
+			if (validation.hasErrors()) {
+				flash.error("Please enter Message-Text");
+			}else{
+				currentMessages = solr.Search.SearchMessageAll(searchMessage, true);
+			}
+			render(currentMessages);
+		}
+		
+		if(searchAuthor != null){
+			List<Message> currentMessages = null; 
+			validation.required(searchAuthor);
+			if (validation.hasErrors()) {
+				flash.error("Please enter Author");
+			}else{
+				currentMessages = solr.Search.SearchMessageByAuthor(searchAuthor);
+			}
+			render(currentMessages);
+		}
+		
+		if(searchUser != null){
+			List<models.User> currentUsers = null;
+			
+			validation.required(searchUser);
+			if (validation.hasErrors()) {
+				flash.error("Please enter User");
+			}else{
+				currentUsers = solr.Search.SearchUserAll(searchUser);
+			}
+			render(currentUsers);
+		}
+		
+		render();
+		
 	}
 	
-	public static void searchMessage(String messageText){
-		List<Message> currentMessages = solr.Search.SearchMessageAll(messageText, false);
-		render(currentMessages);
-	}
 
 }
