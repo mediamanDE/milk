@@ -1,3 +1,4 @@
+#{set nickname:'juggler' /}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,9 +21,15 @@
 </head>
 <body>
 <div class="container_24">
-
-  <div class="grid_5 block"> Nav </div>
-  <div class="grid_19 contents">
+  <div class="grid_24 box header"> &nbsp; </div>
+  <div class="grid_5 block box">
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/#{get 'nickname' /}/">My Profile</a></li>
+      <li><a href="/group/">Groups</a></li>
+    </ul>
+  </div>
+  <div class="grid_19 contents box">
     <h1>#{get 'title' /}</h1>
     #{doLayout /} </div>
   <div class="clear"></div>
