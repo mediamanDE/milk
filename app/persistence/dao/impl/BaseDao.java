@@ -2,6 +2,8 @@ package persistence.dao.impl;
 
 import java.net.UnknownHostException;
 
+import play.Play;
+
 import com.mongodb.Mongo;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
@@ -20,6 +22,8 @@ public class BaseDao implements IDBConstants {
 	
 	protected synchronized void init() {
 		if (mongo == null) {
+			
+			//String host = Play.configuration.get(key);
 			try {
 				mongo = new Mongo( DATABASE_HOST , DATABASE_PORT );
 				
