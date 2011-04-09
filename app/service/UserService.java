@@ -1,5 +1,8 @@
 package service;
 
+import java.util.List;
+
+import models.Message;
 import models.User;
 import persistence.dao.api.IUserDao;
 import persistence.dao.impl.UserDaoImpl;
@@ -14,5 +17,9 @@ public class UserService {
 
 	public static void storeUser(User user){
 		userDao.store(user);
+	}
+	
+	public static List<Message> getMessagesByUser(User user){
+		return null;
 	}
 }
