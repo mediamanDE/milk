@@ -12,7 +12,7 @@ import persistence.dao.api.IUserDao;
 import persistence.dao.impl.GroupDaoImpl;
 import persistence.dao.impl.UserDaoImpl;
 
-public class DaoTest {
+public class GroupDaoTest {
 
 	/**
 	 * @param args
