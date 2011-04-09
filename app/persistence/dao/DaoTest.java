@@ -1,6 +1,8 @@
 package persistence.dao;
 
-import persistence.dao.impl.MessageDaoImpl;
+import models.User;
+import persistence.dao.api.IUserDao;
+import persistence.dao.impl.UserDaoImpl;
 
 public class DaoTest {
 
@@ -8,9 +10,13 @@ public class DaoTest {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		MessageDaoImpl messageDao = new MessageDaoImpl();
-		messageDao.testInsert();
-		messageDao.testFind();
+		IUserDao userDao = new UserDaoImpl();
+		User user = userDao.getByOpenId("123");
+		if (user == null) System.out.println("User does not exist");
+		
+		User userNew = new User();
+		userNew.setOpenId("123");
+		userDao.store(userNew);
 	}
 
 }

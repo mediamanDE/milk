@@ -1,5 +1,7 @@
 package models;
 
+import java.util.List;
+
 public class User {
 	private String openId;
 	private String nickname;
@@ -8,7 +10,7 @@ public class User {
 	private String avatarUrl;
 	private int postCount;
 	private String timezone;
-	private ExternalLink[] externalLinks;
+	private List<ExternalLink> externalLinks;
 	
 	/**
 	 * @return the openId
@@ -97,13 +99,13 @@ public class User {
 	/**
 	 * @return the externalLinks
 	 */
-	public ExternalLink[] getExternalLinks() {
+	public List<ExternalLink> getExternalLinks() {
 		return externalLinks;
 	}
 	/**
 	 * @param externalLinks the externalLinks to set
 	 */
-	public void setExternalLinks(ExternalLink[] externalLinks) {
+	public void setExternalLinks(List<ExternalLink> externalLinks) {
 		this.externalLinks = externalLinks;
 	}
 }
