@@ -24,6 +24,7 @@ public class Search extends Controller {
 		//solr.Delete.deleteAll();
 		
 		
+		
 		List<Message> currentMessages = solr.Search.SearchMessageAll("is", false);
 		render(currentMessages);
 		
