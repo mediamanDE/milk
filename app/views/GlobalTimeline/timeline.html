@@ -1,5 +1,6 @@
 #{extends 'mediaman.html' /}
 #{set title:"Global Timeline"  /}
+#{set nickname:username /}
 <form action="@{sendMessage()}" method="POST">
     <label for="user">Enter your Message :</label>
     <input type="text" name="messageText" id="messageText" />
