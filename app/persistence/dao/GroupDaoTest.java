@@ -47,5 +47,10 @@ public class GroupDaoTest {
             System.out.println("no groups");
         }
 
+        Group foundGroup = groupDao.getGroupByName("Coffee");
+        if (foundGroup != null) {
+            System.out.println("Found group:");
+            foundGroup.debug();
+        }
     }
 }
