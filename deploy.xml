@@ -28,4 +28,11 @@
                 war="${deploy.war.file}" />
     </target>
 
+    <target name="undeploy-war">
+        <undeploy url="${tomcat.manager.url}" 
+                username="${tomcat.manager.username}" 
+                password="${tomcat.manager.password}"
+                path="${deploy.context.path}" />
+    </target>
+
 </project>
