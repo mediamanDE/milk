@@ -11,7 +11,7 @@ public class Authentication extends Controller {
 	
 	public static final String USER_ID = "UserID";
 	
-	@Before(unless={"login", "authenticateOpenID","register"})
+	@Before(unless={"login", "authenticateOpenID","Register.register", "Register.saveUser"})
 	public static void checkAuthenticated() {
 	    if(!session.contains(USER_ID)) {
 	        login();
