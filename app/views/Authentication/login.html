@@ -4,9 +4,9 @@
 
 <center>
 	<h1>Login into milk!</h1>
-	<form action="@{authenticate()}" method="POST">
-	    <label for="user">What's your OpenID?</label>
-	    <input type="text" name="user" id="user" />
+	<form action="@{authenticateOpenID()}" method="POST">
+	    <label for="openID">What's your OpenID?</label>
+	    <input type="text" name="openID" id="openID" />
 	    <input type="submit" value="login..." />
 	</form>
 	

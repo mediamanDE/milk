@@ -16,7 +16,7 @@ public class Register extends Controller {
 
 	}
 
-	public void saveFileds(String fullname, String displayname) {
+	public static void saveUser(String fullname, String displayname) {
 
 		validation.required(fullname);
 		validation.required(displayname);
@@ -27,16 +27,14 @@ public class Register extends Controller {
 			}
 			register();
 		} else {
-			if (fullname != "" && displayname != "") {
-				User newuser = new User();
-				UserInfo verifiedUser = OpenID.getVerifiedID();
-				String Nickname = verifiedUser.id;
-				Nickname.substring(33);
-				newuser.setDisplayname(displayname);
-				newuser.setFullname(fullname);
-				newuser.setNickname(Nickname);
-				newuser.setOpenId(verifiedUser.id);
-			}
+			User user = new User();
+			String nickname = session.get("user").substring(33);
+			user.setDisplayname(displayname);
+			user.setFullname(fullname);
+			user.setNickname(nickname);
+			user.setOpenId(session.get("user"));
+			
+			redirect("/");
 		}
 	}
 }
