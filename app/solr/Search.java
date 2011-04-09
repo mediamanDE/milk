@@ -110,7 +110,7 @@ public class Search {
 	
 	private static Message getCleanMessage(SolrDocument solrDocument){
 		Message message = new Message();
-		message.set_id(Integer.parseInt((String)solrDocument.getFieldValue("id")));
+		message.setId((String)solrDocument.getFieldValue("id"));
 		message.setMessagetext((String)solrDocument.getFieldValue("description"));
 		// FIX
 		//message.setPostdate(new Date((String)solrDocument.getFieldValue("last_modified")));

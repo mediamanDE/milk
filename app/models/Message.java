@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 public class Message {
-    private String _id;
+    private String id;
     private Date postdate;
     private List<Group> groups;
     private List<Message> ancestors;
@@ -15,7 +15,7 @@ public class Message {
 	public void debug() {
 		
 		System.out.println("[\n"
-				+ "_id = " + _id + ",\n"
+				+ "_id = " + id + ",\n"
 				+ "postdate = " + postdate + ",\n"
 				+ "messagetext = " + messagetext);
 
@@ -31,7 +31,7 @@ public class Message {
 		int numAncestors = (ancestors != null) ? ancestors.size() : 0;
 		for (int i = 0; i < numAncestors; i++) {
 			Message msg = ancestors.get(i);
-			System.out.println("      [_id = " + msg.get_id() + " | postdate = " + msg.getPostdate() + "]");
+			System.out.println("      [_id = " + msg.getId() + " | postdate = " + msg.getPostdate() + "]");
 		}
 		System.out.println("   ]");
 
@@ -46,16 +46,16 @@ public class Message {
 	}
 
 	/**
-	 * @return the _id
+	 * @return the id
 	 */
-	public String get_id() {
-		return _id;
+	public String getId() {
+		return id;
 	}
 	/**
 	 * @param _id the _id to set
 	 */
-	public void set_id(String _id) {
-		this._id = _id;
+	public void setId(String id) {
+		this.id = id;
 	}
 	/**
 	 * @return the postdate

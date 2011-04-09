@@ -15,7 +15,7 @@ public class Delete {
 	}
 	
 	public static void deleteMessage(Message message){
-		deleteByID(Integer.toString(message.get_id()));
+		deleteByID(message.getId());
 	}
 	
 	public static void deleteGroup(Group group){

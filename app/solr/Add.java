@@ -18,7 +18,7 @@ public class Add {
 	public static void addMessage(Message message) {
 		SolrInputDocument docMessage = new SolrInputDocument();
 		
-		docMessage.addField("id",message.get_id(),1.0f);
+		docMessage.addField("id",message.getId(),1.0f);
 		docMessage.addField("description",message.getMessagetext());
 		//docMessage.addField("text",message.getMessagetext());
 		//docMessage.addField("keywords",message.getAncestors());

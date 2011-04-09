@@ -15,7 +15,7 @@ public class MessageService{
 	public static void deleteMessage(Message message){
 		if(null != message){
 			message.setMessagetext("");
-			if( getMessageById(message.get_id()) != null ){
+			if( getMessageById(message.getId()) != null ){
 				messageDao.store(message);
 			} else {
 				//TODO throw new exception (message does not exist)
