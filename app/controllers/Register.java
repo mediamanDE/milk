@@ -28,12 +28,14 @@ public class Register extends Controller {
 			}
 			register();
 		} else {
+			session.put(Authentication.USER_ID, session.get(Authentication.USER_ID + "_temp"));
+			session.remove(Authentication.USER_ID + "_temp");
+			
 			User user = new User();
-			String nickname = session.get(Authentication.USER_ID).substring(33);
+			user.setOpenId(session.get(Authentication.USER_ID));
 			user.setDisplayname(displayname);
 			user.setFullname(fullname);
-			user.setNickname(nickname);
-			user.setOpenId(session.get("user"));
+			user.setNickname(session.get(Authentication.USER_ID).substring(33));
 			UserService.storeUser(user);
 			redirect("/");
 		}
