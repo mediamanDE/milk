@@ -16,26 +16,25 @@ import org.apache.solr.common.SolrDocumentList;
 public class Search {
 
 	public static List<Message> QueryMessage(SolrQuery query){
-		SolrDocumentList solrDocs = queryFromServer(query).getResults();
-		List<Message> listMessage = new ArrayList<Message>(); 
-		for (SolrDocument solrDocument : solrDocs) {
-			listMessage.add(getCleanMessage(solrDocument));
+		QueryResponse queryRsp = queryFromServer(query);
+		if(queryRsp != null){
+			SolrDocumentList solrDocs = queryFromServer(query).getResults();
+			List<Message> listMessage = new ArrayList<Message>(); 
+			for (SolrDocument solrDocument : solrDocs) {
+				listMessage.add(getCleanMessage(solrDocument));
+			}
+			return listMessage;
 		}
-		return listMessage;
+		return null;
 	}
 	
 	public static List<Message> SearchMessageAll(String search,boolean LazySearch){
 		SolrQuery query = new SolrQuery();
 		
-		
-		
 		//????
     //query.setQuery("*:" + search);
-		
 		// Lazy
     query.setQuery("description:*" + search+"*");
-    
-    
     query.addSortField("last_modified", SolrQuery.ORDER.asc);
     
 //    SolrQuery solrQuery = new  SolrQuery().
@@ -49,27 +48,31 @@ public class Search {
     //.setHighlight(true).setHighlightSnippets(1); //set other params as needed
     //.setParam("hl.fl", "content");
     
-    SolrDocumentList solrDocs = queryFromServer(query).getResults();
-    
-		List<Message> listMessage = new ArrayList<Message>(); 
-		for (SolrDocument solrDocument : solrDocs) {
-			listMessage.add(getCleanMessage(solrDocument));
-		}
-			
-		// GET Highlight
-		/*Iterator<SolrDocument> iterResult = queryRsp.getResults().iterator();
-    while (iterResult.hasNext()) {
-      SolrDocument resultDoc = iter.next();
+    QueryResponse queryRsp = queryFromServer(query);
+    if(queryRsp != null){
+    	SolrDocumentList solrDocs = queryFromServer(query).getResults();
+      
+  		List<Message> listMessage = new ArrayList<Message>(); 
+  		for (SolrDocument solrDocument : solrDocs) {
+  			listMessage.add(getCleanMessage(solrDocument));
+  		}
+  			
+  		// GET Highlight
+  		/*Iterator<SolrDocument> iterResult = queryRsp.getResults().iterator();
+      while (iterResult.hasNext()) {
+        SolrDocument resultDoc = iter.next();
 
-      String content = (String) resultDoc.getFieldValue("content");
-      String id = (String) resultDoc.getFieldValue("id"); //id is the uniqueKey field
+        String content = (String) resultDoc.getFieldValue("content");
+        String id = (String) resultDoc.getFieldValue("id"); //id is the uniqueKey field
 
-      if (queryRsp.getHighlighting().get(id) != null) {
-        List<String> highlightSnippets = queryRsp.getHighlighting().get(id).get("content");
-      }
-    }*/
-		
-		return listMessage;
+        if (queryRsp.getHighlighting().get(id) != null) {
+          List<String> highlightSnippets = queryRsp.getHighlighting().get(id).get("content");
+        }
+      }*/
+  		
+  		return listMessage;
+    }
+    return null;
 	}
 
 	public static void SearchMessage(Message message){
@@ -79,12 +82,16 @@ public class Search {
 	public static Message SearchMessageByID(String ID){
 		SolrQuery query = new SolrQuery();
 		query.setQuery("id:" + ID);
-		SolrDocumentList solrDocs = queryFromServer(query).getResults();
-		Message message = null;
-		if(solrDocs != null){
-			message = getCleanMessage(solrDocs.get(0));
+		QueryResponse queryRsp = queryFromServer(query);
+		if(queryRsp != null){
+			SolrDocumentList solrDocs = queryFromServer(query).getResults();
+			Message message = null;
+			if(solrDocs != null){
+				message = getCleanMessage(solrDocs.get(0));
+			}
+			return message;
 		}
-		return message;
+		return null;
 	}
 	
 	public static void SearchMessageText(){
@@ -107,7 +114,6 @@ public class Search {
 		
 	}
 	
-	
 	private static Message getCleanMessage(SolrDocument solrDocument){
 		Message message = new Message();
 		message.setId((String)solrDocument.getFieldValue("id"));
@@ -116,7 +122,6 @@ public class Search {
 		//message.setPostdate(new Date((String)solrDocument.getFieldValue("last_modified")));
 		return message;
 	}
-	
 	
 	private static QueryResponse queryFromServer(SolrQuery query){
 		QueryResponse queryRsp = null;
