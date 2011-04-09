@@ -22,7 +22,7 @@ public class Delete {
 	}
 	
 	public static void deleteGroup(Group group){
-		deleteByID(Integer.toString(group.get_id()));
+		deleteByID(Integer.toString(group.getId()));
 	}
 	
 	public static void deleteUser(User user){

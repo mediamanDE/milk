@@ -5,15 +5,16 @@
 <br/>
 <h2>Personal Data :</h2> <br/>
 
+
 <form action="@{saveChanges()}" method="POST">
     <label for="avatar">Avatar URL :</label>
-    <input type="text" name="avatarURL" id="avatarURL"  value=${currentUser.getAvatarUrl()}/></br>
+    <input type="text" name="avatarURL" id="avatarURL"  value=${currentUser.avatarUrl}/></br>
     <label for="dispName">Your display name :</label>
-    <input type="text" name="displayname" id="displayname" value=${currentUser.getDisplayname()}></br>
+    <input type="text" name="displayname" id="displayname" value=${currentUser.displayname}></br>
     <label for="name">Your full name :</label>
-    <input type="text" name="fullname" id="fullname" value=${currentUser.getFullname()}></br>
+    <input type="text" name="fullname" id="fullname" value=${currentUser.fullname}></br>
     <label for="nick">Your nickname :</label>
-    <input type="text" name="nickname" id="nickname" value=${currentUser.getNickname()}></br>
+    <input type="text" name="nickname" id="nickname" value=${currentUser.nickname}></br>
     </br>
     <input type="submit" value="Save Profile...." />
 </form>

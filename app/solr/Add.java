@@ -48,7 +48,7 @@ public class Add {
 
 	public static void addGroup(Group group) {
 		SolrInputDocument docGroup = new SolrInputDocument();
-		docGroup.addField("id", group.get_id(), 1.0f);
+		docGroup.addField("id", group.getId(), 1.0f);
 		docGroup.addField("name", group.getName());
 		docGroup.addField("description", group.getDescription());
 

@@ -39,3 +39,9 @@
 #{/list}
 
 <h2>Personal Info</h2>
+
+Display Name: ${currentUser.displayname} <br/>
+Full Name: ${currentUser.fullname} <br/>
+Nickname: ${currentUser.nickname} <br/>
+
+<a href="@{User.edit(nickname)}">Edit Profile</a>
