@@ -5,6 +5,7 @@ import play.libs.OpenID.UserInfo;
 import play.mvc.Before;
 import play.mvc.Controller;
 import service.UserService;
+import utils.Redirect;
 
 public class Authentication extends Controller {
 	
@@ -13,7 +14,7 @@ public class Authentication extends Controller {
 	@Before(unless={"login", "authenticateOpenID"})
 	public static void checkAuthenticated() {
 	    if(!session.contains("user")) {
-	        login();
+	    	login();
 	    }
 	}
 	     
@@ -21,13 +22,13 @@ public class Authentication extends Controller {
 		if(!session.contains("user")) {
 			render();
 		}else{
-			GlobalTimeline.timeline();
+			Redirect.in_app("GlobalTimeline.timeline");
 		}
 	}
 	
 	public static void logout(){
 		session.clear();
-		redirect("/");
+		Redirect.in_app("GlobalTimeline.timeline");
 	}
 	
 	public static void authenticateOpenID(String openID) {
@@ -38,10 +39,10 @@ public class Authentication extends Controller {
 	            login();
 	        } 
 	        if(UserService.getUserByOpenId(verifiedUser.id) == null){
-	        	redirect("/register/");
+				Redirect.in_app("Register.register");
 	        }else{
 	        	session.put(USER_ID, verifiedUser.id);
-		        redirect("/");
+				Redirect.in_app("GlobalTimeline.timeline");
 	        }
 	    } else {
 	        if(!OpenID.id(openID).verify()) { // will redirect the user

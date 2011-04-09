@@ -10,7 +10,7 @@ public class Bootstrap extends Job {
 
 	public void doJob() {
 		String appMode = Play.configuration.getProperty("application.mode", "dev");
-		if ( "prod".equals(appMode) ) {
+		if ( "prod".equalsIgnoreCase(appMode) ) {
 			Play.ctxPath = Play.configuration.getProperty("context.path", "/milk");
 			Router.load(Play.ctxPath);
 			Logger.debug("Set ContextPath to %s", Play.ctxPath);
