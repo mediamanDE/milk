@@ -6,14 +6,14 @@ import play.mvc.With;
 import java.util.*;
 
 import models.Message;
+import service.*;
 
 @With(Authentication.class)
 public class GlobalTimeline extends Controller {
 	
 	public static void timeline(){
 		
-		List<Message> currentMessages = null;
-		
+		List<Message> currentMessages = TimelineService.getAllMessages();
 		render(currentMessages);
 		
 	}
@@ -27,6 +27,14 @@ public class GlobalTimeline extends Controller {
 			}
 			timeline();
 		}else{
+			
+			Message actualMessage = new Message();
+			
+			actualMessage.setMessagetext(messageText);
+			actualMessage.setFrom(UserService.getUserByOpenId(session.get("user")));
+			
+			MessageService.storeMessage(actualMessage);
+			
 			timeline();
 		}
 	}
