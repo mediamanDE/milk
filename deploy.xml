@@ -1,7 +1,7 @@
 <project name="milk" basedir=".">
 	
 	<property file="local.properties" />
-    <property file="build.properties" />
+    <property file="deploy.properties" />
 	
 	<path id="cp.deploy">
 	    <fileset dir="deploy">
