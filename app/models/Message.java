@@ -10,7 +10,41 @@ public class Message {
     private List<Message> ancestors;
     private String messagetext;
     private User from;
-    
+
+
+	public void debug() {
+		
+		System.out.println("[\n"
+				+ "_id = " + _id + ",\n"
+				+ "postdate = " + postdate + ",\n"
+				+ "messagetext = " + messagetext);
+
+		System.out.println("groups = \n   [");
+		int numGroups = (groups != null) ? groups.size() : 0;
+		for (int i = 0; i < numGroups; i++) {
+			Group grp = groups.get(i);
+			System.out.println("      [name = " + grp.getName() + "]");
+		}
+		System.out.println("   ]");
+
+		System.out.println("ancestors = \n   [");
+		int numAncestors = (ancestors != null) ? ancestors.size() : 0;
+		for (int i = 0; i < numAncestors; i++) {
+			Message msg = ancestors.get(i);
+			System.out.println("      [_id = " + msg.get_id() + " | postdate = " + msg.getPostdate() + "]");
+		}
+		System.out.println("   ]");
+
+		System.out.println("from =/n   ["
+				+ "      openId = " + from.getOpenId() + ",\n"
+				+ "      nickname = " + from.getNickname() + ",\n"
+				+ "      fullname = " + from.getFullname() + ",\n"
+				+ "      displayname = " + from.getDisplayname() + ",\n"
+				+ "   ]");
+
+		System.out.println("]");
+	}
+
 	/**
 	 * @return the _id
 	 */
