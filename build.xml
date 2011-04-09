@@ -1,19 +1,31 @@
-<project name="milk" basedir=".." default="build-play-war">
+<project name="milk" basedir=".">
 	
-	<property file="milk/local.properties" />
+	<property file="local.properties" />
+    <property file="build.properties" />
+	
+	<path id="cp.deploy">
+	    <fileset dir="deploy">
+	        <include name="**/*.jar"/>
+    	</fileset>
+	</path>
+	
+    <taskdef name="deploy"    classname="org.apache.catalina.ant.DeployTask" classpathref="cp.deploy" />
+    <taskdef name="reload"    classname="org.apache.catalina.ant.ReloadTask" classpathref="cp.deploy" />
+    <taskdef name="undeploy"  classname="org.apache.catalina.ant.UndeployTask" classpathref="cp.deploy" />
 
-	<property name="play.home" value="/opt/play-1.1.1" />
-	<property name="dist.dir" value="${basedir}/milk-dist" />
-	<property name="app.dir" location="${basedir}/${ant.project.name}" />
-	<property name="war.file" location="${dist.dir}/${ant.project.name}" />
-	
-	<target name="build-play-war">
-        <mkdir dir="${dist.dir}" />
-		<exec executable="${play.home}/play" vmlauncher="false">
-			<arg value="war"/>
-			<arg value="${app.dir}" />
-            <arg value="--zip"/>
-            <arg value="--output=${war.file}"/>
-		</exec>
+	<target name="reload-war">
+	    <reload url="${tomcat.manager.url}" 
+	    	    username="${tomcat.manager.username}" 
+	    	    password="${tomcat.manager.password}"
+		        path="${deploy.context.path}"/>
 	</target>
+
+    <target name="deploy-war">
+        <deploy url="${tomcat.manager.url}" 
+                username="${tomcat.manager.username}" 
+                password="${tomcat.manager.password}"
+                path="${deploy.context.path}"
+                war="${deploy.war.file}" />
+    </target>
+
 </project>
