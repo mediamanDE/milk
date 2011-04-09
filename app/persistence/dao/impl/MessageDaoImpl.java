@@ -1,11 +1,14 @@
 package persistence.dao.impl;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
 import models.Group;
 import models.Message;
+import models.User;
 import persistence.dao.api.IMessageDao;
+import service.UserService;
 
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
@@ -13,6 +16,8 @@ import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import java.util.ArrayList;
+
+import org.bson.types.ObjectId;
 
 public class MessageDaoImpl extends BaseDao implements IMessageDao {
 
@@ -42,26 +47,27 @@ public class MessageDaoImpl extends BaseDao implements IMessageDao {
     }
 
     @Override
-    public Message getMessageById(String messageId) {
+    public Message getMessageById(final String messageId) {
         Message returnMessage = null;
-
+        
         DB db = getDatabase();
         DBCollection coll = db.getCollection(COLLECTION_MESSAGES);
         DBObject result;
+        ObjectId messageIdObj = new ObjectId(messageId);
 
         BasicDBObject query = new BasicDBObject();
-        query.put(FIELD_MESSAGE_ID, messageId);
+        query.put(FIELD_MESSAGE_ID, messageIdObj);
         result = coll.findOne(query);
         if (result != null) {
             Map resultMap = result.toMap();
 
             returnMessage = new Message();
-            returnMessage.setId((String) resultMap.get(FIELD_MESSAGE_ID));
+            returnMessage.setId(((ObjectId) resultMap.get(FIELD_MESSAGE_ID)).toString());
 //			returnMessage.setAncestors((String) resultMap.get(FIELD_MESSAGE_ANCESTORS));
-//			returnMessage.setFrom((String) resultMap.get(FIELD_MESSAGE_FROM));
+			returnMessage.setFrom((User) UserService.getUserByOpenId((String)resultMap.get(FIELD_MESSAGE_FROM)));
 //			returnMessage.setGroups((String) resultMap.get(FIELD_MESSAGE_GROUPS));
             returnMessage.setMessagetext((String) resultMap.get(FIELD_MESSAGE_MESSAGETEXT));
-//			returnMessage.setPostdate((String) resultMap.get(FIELD_MESSAGE_POSTDATE));
+			returnMessage.setPostdate((Date) resultMap.get(FIELD_MESSAGE_POSTDATE));
         }
         return returnMessage;
     }
@@ -79,11 +85,11 @@ public class MessageDaoImpl extends BaseDao implements IMessageDao {
     @Override
     public List<Message> getAllMessages() {
 
+        String messageId = null;
         List<Message> messagesArray = new ArrayList<Message>();
 
         DB db = getDatabase();
         DBCollection coll = db.getCollection(COLLECTION_MESSAGES);
-        DBObject result;
 
         BasicDBObject query = new BasicDBObject();
         BasicDBObject field = new BasicDBObject();
@@ -99,8 +105,13 @@ public class MessageDaoImpl extends BaseDao implements IMessageDao {
             BasicDBObject obj = (BasicDBObject) cursor.next();
 
             Message myMessage = new Message();
-            myMessage = getMessageById((String) obj.getString(FIELD_MESSAGE_ID));
-            messagesArray.add(myMessage);
+            messageId = obj.getString(FIELD_MESSAGE_ID);
+
+            myMessage = getMessageById(messageId);
+            
+            if (null != myMessage) {
+                messagesArray.add(myMessage);
+            }
 
         }
 
