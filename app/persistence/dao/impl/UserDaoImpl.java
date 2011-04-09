@@ -61,31 +61,23 @@ public class UserDaoImpl extends BaseDao implements IUserDao {
 
 		DB db = getDatabase();
 		DBCollection coll = db.getCollection(COLLECTION_USERS);
-		DBObject result;
+		BasicDBObject result;
 		
 		BasicDBObject query = new BasicDBObject();
 		query.put(FIELD_USER_OPENID, openId);
-		result = coll.findOne(query);
+		result = (BasicDBObject) coll.findOne(query);
 		if (result != null) {
-			Map resultMap = result.toMap();
-//			Iterator it = resultMap.entrySet().iterator();
-//		    while (it.hasNext()) {
-//		        Map.Entry pairs = (Map.Entry)it.next();
-//		        System.out.println(pairs.getKey() + " = " + pairs.getValue());
-//		    }
 
 			returnUser = new User();
-			returnUser.setAvatarUrl((String) resultMap.get(FIELD_USER_AVATARURL));
-			returnUser.setDisplayname((String) resultMap.get(FIELD_USER_DISPLAYNAME));
-			//TODO implement subobject
-			//returnUser.setExternalLinks(result.get(FIELD_USER_EXTERNALLINKS).toString());
-			returnUser.setFullname((String) resultMap.get(FIELD_USER_FULLNAME));
-			returnUser.setNickname((String) resultMap.get(FIELD_USER_NICKNAME));
-			returnUser.setOpenId((String) resultMap.get(FIELD_USER_OPENID));
-			returnUser.setPostCount((Integer) resultMap.get(FIELD_USER_POSTCOUNT));
-			returnUser.setTimezone((String) resultMap.get(FIELD_USER_TIMEZONE));
+			returnUser.setAvatarUrl(result.getString(FIELD_USER_AVATARURL));
+			returnUser.setDisplayname(result.getString(FIELD_USER_DISPLAYNAME));
+			returnUser.setFullname(result.getString(FIELD_USER_FULLNAME));
+			returnUser.setNickname(result.getString(FIELD_USER_NICKNAME));
+			returnUser.setOpenId(result.getString(FIELD_USER_OPENID));
+			returnUser.setPostCount(result.getInt(FIELD_USER_POSTCOUNT));
+			returnUser.setTimezone(result.getString(FIELD_USER_TIMEZONE));
 			
-			BasicDBList list = (BasicDBList) resultMap.get(FIELD_USER_EXTERNALLINKS);
+			BasicDBList list = (BasicDBList) result.get(FIELD_USER_EXTERNALLINKS);
 			int sizeExternalLinks = (list != null) ? list.size() : 0;
 			if (sizeExternalLinks > 0) {
 				
@@ -108,6 +100,5 @@ public class UserDaoImpl extends BaseDao implements IUserDao {
 		}
 		return returnUser;
 	}
-
 	
 }

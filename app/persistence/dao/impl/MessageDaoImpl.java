@@ -80,10 +80,13 @@ public class MessageDaoImpl extends BaseDao implements IMessageDao {
 
     /**
      *
+     * @param orderBy Asc: 1, DESC -1
      * @return
      */
     @Override
-    public List<Message> getAllMessages() {
+    public List<Message> getAllMessages(String orderBy) {
+
+        int order = ("ASC" == orderBy) ? 1 : -1;
 
         String messageId = null;
         List<Message> messagesArray = new ArrayList<Message>();
@@ -93,12 +96,16 @@ public class MessageDaoImpl extends BaseDao implements IMessageDao {
 
         BasicDBObject query = new BasicDBObject();
         BasicDBObject field = new BasicDBObject();
+        BasicDBObject sortfield = new BasicDBObject();
+
+        field.put(FIELD_MESSAGE_POSTDATE, order);
+        field.put(FIELD_MESSAGE_ID, order);
         
-        field.put(FIELD_MESSAGE_ID, 1);
+        sortfield.put(FIELD_MESSAGE_POSTDATE, order);
         
         // query: where
         // field: which field(s)
-        DBCursor cursor = coll.find(query,field);
+        DBCursor cursor = coll.find(query,field).sort(sortfield);
 
         while (cursor.hasNext()) {
 
