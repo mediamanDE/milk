@@ -1,11 +1,10 @@
 package controllers;
 
+import models.User;
 import play.mvc.Controller;
 import play.mvc.With;
-import play.libs.OpenID;
-import play.libs.OpenID.UserInfo;
 import service.UserService;
-import models.User;
+import utils.Redirect;
 
 @With(Authentication.class)
 public class Register extends Controller {
@@ -14,15 +13,11 @@ public class Register extends Controller {
 		render();
 	}
 
-	public void currentFields() {
-
-	}
-
 	public static void saveUser(String fullname, String displayname) {
 
 		validation.required(fullname);
 		validation.required(displayname);
-
+		
 		if (validation.hasErrors()) {
 			for (play.data.validation.Error error : validation.errors()) {
 				flash.error(error.message());
@@ -38,7 +33,7 @@ public class Register extends Controller {
 			user.setFullname(fullname);
 			user.setNickname(session.get(Authentication.USER_ID).substring(33));
 			UserService.storeUser(user);
-			redirect("/");
+			Redirect.in_app("GlobalTimeline.timeline");
 		}
 	}
 }

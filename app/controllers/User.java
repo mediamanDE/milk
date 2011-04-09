@@ -1,12 +1,15 @@
 package controllers;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import models.Message;
 import play.mvc.Controller;
 import play.mvc.With;
 import service.MessageService;
 import service.UserService;
-import models.Message;
+import utils.Redirect;
 
 @With(Authentication.class)
 public class User extends Controller {
@@ -36,7 +39,9 @@ public class User extends Controller {
 			
 			UserService.storeUser(currentUser);
 			
-			redirect("/"+currentUser.getDisplayname()+"/edit");
+			Map<String, Object> args = new HashMap<String, Object>();
+			args.put("username", currentUser.getDisplayname());
+			Redirect.in_app("User.edit", args);
 		}else{
 			
 			//ToDo

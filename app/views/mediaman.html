@@ -10,10 +10,10 @@
 <meta http-equiv="content-type" content="text/html; charset=utf-8" />
 <title>#{get 'title' /}</title>
 <link href="http://fonts.googleapis.com/css?family=Droid+Sans:regular,bold" rel="stylesheet" type="text/css" >
-<link rel="stylesheet" href="/public/css/reset.css" />
-<link rel="stylesheet" href="/public/css/text.css" />
-<link rel="stylesheet" href="/public/css/960_24_col.css" />
-<link rel="stylesheet" href="/public/css/demo.css" />
+<link rel="stylesheet" href="@{'/public/css/reset.css'}" />
+<link rel="stylesheet" href="@{'/public/css/text.css'}" />
+<link rel="stylesheet" href="@{'/public/css/960_24_col.css'}" />
+<link rel="stylesheet" href="@{'/public/css/demo.css'}" />
 #{get 'moreStyles' /}
 <script src="@{'/public/javascripts/jquery-1.4.2.min.js'}" type="text/javascript" charset="utf-8"></script>
 #{get 'moreScripts' /}
@@ -34,10 +34,10 @@
                     </fieldset>
     </form>
     <ul>
-      <li><a href="/">Home</a></li>
-      <li><a href="/#{get 'nickname' /}">My Profile</a></li>
-      <li><a href="/#{get 'nickname' /}/edit">Edit Profile</a></li>
-      <li><a href="/group/">Groups</a></li>
+      <li><a href="@{GlobalTimeline.timeline()}">Home</a></li>
+      <li><a href="@{User.profile(nickname)}">My Profile</a></li>
+      <li><a href="@{User.edit(nickname)}">Edit Profile</a></li>
+      <li><a href="@{Authentication.logout()}">Logout</a></li>
     </ul>
   </div>
   <div class="grid_19 contents box">

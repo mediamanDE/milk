@@ -1,5 +1,8 @@
 package utils;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import play.Logger;
 import play.mvc.Router;
 
@@ -16,13 +19,17 @@ public class Redirect {
 	 * 
 	 * @param actionName. 
 	 */
-	public static void in_app(String actionName) {
+	public static void in_app(String actionName, Map<String, Object> args) {
 		if ( actionName == null && "".equals(actionName) ) {
 			throw new IllegalArgumentException("Argument actionName must not be null");
 		}
-		String url = Router.reverse(actionName).toString();
+		String url = Router.reverse(actionName, args).toString();
 		Logger.debug("Making in_app redirect for actionName %s to %s", actionName, url);
 		throw new play.mvc.results.Redirect(url, false);
+	}
+	
+	public static void in_app(String actionName) {
+		in_app(actionName, new HashMap<String, Object>(16));
 	}
 	
 
