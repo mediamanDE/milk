@@ -32,4 +32,7 @@ public interface IDBConstants {
 	public static final String FIELD_MESSAGE_FROM = "from";
 
 	public static final String COLLECTION_GROUPS = "groups";
+	public static final String FIELD_GROUP_ID = "id";
+	public static final String FIELD_GROUP_NAME = "name";
+	public static final String FIELD_GROUP_DESCRIPTION = "description";
 }

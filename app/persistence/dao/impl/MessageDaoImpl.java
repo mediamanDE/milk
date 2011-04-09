@@ -79,8 +79,9 @@ public class MessageDaoImpl extends BaseDao implements IMessageDao {
     }
 
     /**
-     *
-     * @param orderBy Asc: 1, DESC -1
+     * Get an ordered List of all Messages.
+     * 
+     * @param orderBy String ASC, DESC
      * @return
      */
     @Override

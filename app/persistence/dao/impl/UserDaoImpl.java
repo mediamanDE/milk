@@ -53,8 +53,35 @@ public class UserDaoImpl extends BaseDao implements IUserDao {
 			mongoUser.put(FIELD_USER_EXTERNALLINKS, list);
 		}
 
-        coll.insert(mongoUser);
+            // Check if user exists
+            if (exists(user.getOpenId())) {
+
+                BasicDBObject query = new BasicDBObject();
+                query.put(FIELD_USER_OPENID, user.getOpenId());
+
+                coll.update(query, mongoUser);
+                
+            } else {
+                coll.insert(mongoUser);
+            }
+            
 	}
+
+        public boolean exists(String openId) {
+
+		DB db = getDatabase();
+		DBCollection coll = db.getCollection(COLLECTION_USERS);
+		BasicDBObject result;
+
+		BasicDBObject query = new BasicDBObject();
+		query.put(FIELD_USER_OPENID, openId);
+		result = (BasicDBObject) coll.findOne(query);
+		if (result != null) {
+                    return true;
+                } else {
+                    return false;
+                }
+        }
 
 	public User getByOpenId(String openId) {
 		User returnUser = null;
