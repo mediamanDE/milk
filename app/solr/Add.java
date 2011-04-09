@@ -55,7 +55,7 @@ public class Add {
 	public static void addUser(User user) {
 		SolrInputDocument docUser = new SolrInputDocument();
 		
-		docUser.addField("id",user.get_id(),1.0f);
+		docUser.addField("id",user.getOpenId(),1.0f);
 		docUser.addField("name",user.getFullname());
 		//docUser("id",user.getAvatarUrl());
 		//docUser("author",user.getDisplayname());
