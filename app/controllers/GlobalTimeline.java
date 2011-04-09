@@ -14,7 +14,8 @@ public class GlobalTimeline extends Controller {
 	public static void timeline(){
 		
 		List<Message> currentMessages = TimelineService.getAllMessages();
-		render(currentMessages);
+		String username = UserService.getUserByOpenId(session.get(Authentication.USER_ID)).getDisplayname(); 
+		render(currentMessages,username);
 		
 	}
 	
