@@ -76,7 +76,7 @@ public class Search {
 		
 	}
 	
-	public static Message SearchMessageByID(int ID){
+	public static Message SearchMessageByID(String ID){
 		SolrQuery query = new SolrQuery();
 		query.setQuery("id:" + ID);
 		SolrDocumentList solrDocs = queryFromServer(query).getResults();
