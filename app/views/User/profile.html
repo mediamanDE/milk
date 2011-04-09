@@ -1,7 +1,41 @@
 #{extends 'baseframe.html' /}
 #{extends 'main.html' /}
 #{set title:"Profile " + username /}
-</br>
-<h2>Personal Timeline</h2> </br>
+<br/>
+<h2>Personal Timeline</h2> <br/>
+
+<form action="@{sendMessage()}" method="POST">
+    <label for="user">Enter your Message :</label>
+    <input type="text" name="messageText" id="messageText" /></br>
+    <label for="groups">Enter the Message Groups :</label>
+    <input type="text" name="messageGroups" id="messageGroups">
+    <input type="submit" value="send..." />
+</form>
+
+#{if flash.error}
+	<h2>${flash.error}</h2>
+#{/if}
+
+#{list items:currentMessages, as:'entity'}
+        <hr/>
+        <div class="message">
+            <div class="message-text">
+            	${entity.getMessagetext()}
+            </div>
+            
+            <div class="message-metadata">
+                <span class="message-author">
+                        
+                </span>
+                <span class="message-date">
+                        
+                </span>
+                <div class="message-groups">
+                        
+                </div>
+            </div>
+        </div>
+        
+#{/list}
 
 <h2>Personal Info</h2>

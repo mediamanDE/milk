@@ -31,7 +31,7 @@ public class GlobalTimeline extends Controller {
 			Message actualMessage = new Message();
 			
 			actualMessage.setMessagetext(messageText);
-			actualMessage.setFrom(UserService.getUserByOpenId(session.get("user")));
+			actualMessage.setFrom(UserService.getUserByOpenId(session.get(Authentication.USER_ID)));
 			
 			MessageService.storeMessage(actualMessage);
 			
