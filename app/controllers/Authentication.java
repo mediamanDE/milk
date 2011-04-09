@@ -1,10 +1,10 @@
 package controllers;
 
-import play.data.validation.Required;
 import play.libs.OpenID;
 import play.libs.OpenID.UserInfo;
 import play.mvc.Before;
 import play.mvc.Controller;
+import service.UserService;
 
 public class Authentication extends Controller {
 	
@@ -29,15 +29,24 @@ public class Authentication extends Controller {
 	}
 	
 	public static void authenticate(String user) {
+		
 		if(OpenID.isAuthenticationResponse()) {
 	        UserInfo verifiedUser = OpenID.getVerifiedID();
+	        
 	        if(verifiedUser == null) {
 	            flash.error("Oops. Authentication has failed");
 	            login();
 	        } 
-	        //FIX ME: Add a if-condition, which decides if a user has already filled in every required profile field, if not, redirect him to /register/
 	        session.put("user", verifiedUser.id);
-            redirect("/");
+
+	        UserService userdata = new UserService();
+	        models.User theuser = userdata.getUserByOpenId(verifiedUser.id);
+	        if(theuser == null){
+	        	redirect("/register/");
+	        }else{
+	        	redirect("/");
+	        }
+            
 	    } else {
 	        if(!OpenID.id(user).verify()) { // will redirect the user
 	            flash.error("Cannot verify your OpenID");

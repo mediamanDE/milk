@@ -15,7 +15,7 @@ GET		/thread/{threadID}							Thread.conversation
 *       /authenticate/                              Authentication.authentication
 GET     /login/                                     Authentication.login
 GET     /logout/ 				                    Authentication.logout
-
+GET		/register/									Register.register
 
 GET     /public/                                    staticDir:public
 

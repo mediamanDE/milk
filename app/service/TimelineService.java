@@ -7,11 +7,11 @@ import models.Message;
 
 public class TimelineService {
 
-	public List<Message> getAllMessages(){
+	public static List<Message> getAllMessages(){
 		return null;
 	}
 	
-	public List<Message> getAllMessagesByGroup(Group group){
+	public static List<Message> getAllMessagesByGroup(Group group){
 		return null;
 	}
 }
