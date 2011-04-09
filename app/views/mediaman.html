@@ -1,3 +1,4 @@
+#{set nickname:'juggler' /}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,9 +21,26 @@
 </head>
 <body>
 <div class="container_24">
-
-  <div class="grid_5 block"> Nav </div>
-  <div class="grid_19 contents">
+  <div class="grid_24 box header">&nbsp;</div>
+  <div class="grid_5 block box">
+  <form id="quick-search" class="quick-search" method="get" action="@{search.search()}">
+        <fieldset>
+            <legend>Quick Search</legend>
+            <input class="quick-search-query" id="quick-search-query" type="search" accesskey="q" autocomplete="off" name="queryString" size="32" results="10" placeholder="Search">
+            <input class="quick-search-submit" id="quick-search-submit" type="submit" value="Search">
+            <div class="aui-dd-parent quick-nav-drop-down"><!-- Quick nav appears here --></div>
+        </fieldset>
+        <fieldset class="hidden parameters">
+            <input type="hidden" id="quickNavEnabled" value="true">
+                    </fieldset>
+    </form>
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/#{get 'nickname' /}/">My Profile</a></li>
+      <li><a href="/group/">Groups</a></li>
+    </ul>
+  </div>
+  <div class="grid_19 contents box">
     <h1>#{get 'title' /}</h1>
     #{doLayout /} </div>
   <div class="clear"></div>

@@ -1,11 +1,12 @@
-#{extends '/Template/mediaman.html' /}
+#{extends 'mediaman.html' /}
 #{set title:"Global Timeline"  /}
-
 <form action="@{sendMessage()}" method="POST">
     <label for="user">Enter your Message :</label>
-    <input type="text" name="messageText" id="messageText" /></br>
+    <input type="text" name="messageText" id="messageText" />
+    </br />
     <label for="groups">Enter the Message Groups :</label>
     <input type="text" name="messageGroups" id="messageGroups">
+    <br />
     <input type="submit" value="send..." />
 </form>
 
