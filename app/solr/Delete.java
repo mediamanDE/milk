@@ -23,7 +23,8 @@ public class Delete {
 	}
 	
 	public static void deleteUser(User user){
-		deleteByID(Integer.toString(user.get_id()));
+		//deleteByID(Integer.toString(user.get_id()));
+		deleteByID(user.getOpenId());
 	}
 	
 	public static void deleteByID(String ID){
