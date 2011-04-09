@@ -16,10 +16,10 @@ public class solrTest extends UnitTest {
     public void TestAddSearchDelete() {
     	
     	Message messageTest = new Message();
-    	int ID = new Random().nextInt();
+    	String ID = Integer.toString(new Random().nextInt());
     	
     	// Verbesserung zu GUID
-    	messageTest.set_id(ID);
+    	messageTest.setId(ID);
     	
     	// Verbesserung zu From/To, Master/Postdate oder seperates Tracking
     	//messageTest.se
@@ -55,7 +55,7 @@ public class solrTest extends UnitTest {
     	//find
     	//solr.Search.SearchMessageAll("is", false);
     	
-    	assertEquals(solr.Search.SearchMessageByID(messageTest.get_id()).get_id(),messageTest.get_id());
+    	assertEquals(solr.Search.SearchMessageByID(messageTest.getId()).getId(),messageTest.getId());
     	
     	//delete
     	solr.Delete.deleteMessage(messageTest);

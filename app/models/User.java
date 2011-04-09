@@ -14,7 +14,7 @@ public class User {
 
 	public void debug() {
 		
-		System.out.println("["
+		System.out.println("[\n"
 				+ "openId = " + openId + ",\n"
 				+ "nickname = " + nickname + ",\n"
 				+ "fullname = " + fullname + ",\n"
@@ -27,7 +27,7 @@ public class User {
 		int numExternalLinks = (externalLinks != null) ? externalLinks.size() : 0;
 		for (int i = 0; i < numExternalLinks; i++) {
 			ExternalLink extLnk = externalLinks.get(i);
-			System.out.println("      [" + extLnk.getName() + " | " + extLnk.getUrl() + "]");
+			System.out.println("      [name = " + extLnk.getName() + " | url = " + extLnk.getUrl() + "]");
 		}
 		System.out.println("   ]");
 

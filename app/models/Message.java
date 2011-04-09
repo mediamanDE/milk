@@ -4,24 +4,58 @@ import java.util.Date;
 import java.util.List;
 
 public class Message {
-    private String _id;
+    private String id;
     private Date postdate;
     private List<Group> groups;
     private List<Message> ancestors;
     private String messagetext;
     private User from;
-    
+
+
+	public void debug() {
+		
+		System.out.println("[\n"
+				+ "_id = " + id + ",\n"
+				+ "postdate = " + postdate + ",\n"
+				+ "messagetext = " + messagetext);
+
+		System.out.println("groups = \n   [");
+		int numGroups = (groups != null) ? groups.size() : 0;
+		for (int i = 0; i < numGroups; i++) {
+			Group grp = groups.get(i);
+			System.out.println("      [name = " + grp.getName() + "]");
+		}
+		System.out.println("   ]");
+
+		System.out.println("ancestors = \n   [");
+		int numAncestors = (ancestors != null) ? ancestors.size() : 0;
+		for (int i = 0; i < numAncestors; i++) {
+			Message msg = ancestors.get(i);
+			System.out.println("      [_id = " + msg.getId() + " | postdate = " + msg.getPostdate() + "]");
+		}
+		System.out.println("   ]");
+
+		System.out.println("from =/n   ["
+				+ "      openId = " + from.getOpenId() + ",\n"
+				+ "      nickname = " + from.getNickname() + ",\n"
+				+ "      fullname = " + from.getFullname() + ",\n"
+				+ "      displayname = " + from.getDisplayname() + ",\n"
+				+ "   ]");
+
+		System.out.println("]");
+	}
+
 	/**
-	 * @return the _id
+	 * @return the id
 	 */
-	public String get_id() {
-		return _id;
+	public String getId() {
+		return id;
 	}
 	/**
 	 * @param _id the _id to set
 	 */
-	public void set_id(String _id) {
-		this._id = _id;
+	public void setId(String id) {
+		this.id = id;
 	}
 	/**
 	 * @return the postdate
