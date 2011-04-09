@@ -8,6 +8,9 @@ import models.User;
 
 import org.apache.solr.client.solrj.SolrServerException;
 
+import play.Logger;
+import play.Play;
+
 public class Delete {
 
 	public static void deleteAll(){
@@ -19,7 +22,7 @@ public class Delete {
 	}
 	
 	public static void deleteGroup(Group group){
-		deleteByID(Integer.toString(group.get_id()));
+		deleteByID(Integer.toString(group.getId()));
 	}
 	
 	public static void deleteUser(User user){
@@ -39,13 +42,19 @@ public class Delete {
 	}
 	
 	public static void deleteByQuery(String Query){
+		Boolean enabled = Boolean.valueOf(Play.configuration.getProperty("milk.solr.enabled", "false"));
+		if ( !enabled ) {
+			Logger.info("Tried to delete document from Solr, while it's disabled");
+			return;
+		}
+		
 		try {
 			Server.getServer().deleteByQuery(Query);
 			Server.getServer().commit();
 		} catch (SolrServerException e) {
-			// TODO
+			Logger.warn("Exception while deleting documents from Solr", e);
 		} catch (IOException e) {
-			// TODO
+			Logger.warn("Exception while deleting documents from Solr", e);
 		}
 	}
 	

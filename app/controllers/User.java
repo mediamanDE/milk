@@ -7,6 +7,7 @@ import java.util.Map;
 import models.Message;
 import play.mvc.Controller;
 import play.mvc.With;
+import play.mvc.results.NotFound;
 import service.MessageService;
 import service.UserService;
 import utils.Redirect;
@@ -16,9 +17,9 @@ public class User extends Controller {
 
 	public static void profile(String username) {
 		
-		models.User personalUser = UserService.getUserByOpenId(session.get(Authentication.USER_ID));
-		List<Message> currentMessages = UserService.getMessagesByUser(personalUser);
-		render(username, personalUser, currentMessages );
+		models.User currentUser = UserService.getUserByOpenId(session.get(Authentication.USER_ID));
+		List<Message> currentMessages = UserService.getMessagesByUser(currentUser);
+		render(username, currentUser, currentMessages );
 		
 	}
 
@@ -43,8 +44,7 @@ public class User extends Controller {
 			args.put("username", currentUser.getDisplayname());
 			Redirect.in_app("User.edit", args);
 		}else{
-			
-			//ToDo
+			throw new NotFound("User does not exist");
 		}
 		
 	}
