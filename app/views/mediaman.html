@@ -34,10 +34,10 @@
                     </fieldset>
     </form>
     <ul>
-      <li><a href="/">Home</a></li>
-      <li><a href="/#{get 'nickname' /}">My Profile</a></li>
-      <li><a href="/#{get 'nickname' /}/edit">Edit Profile</a></li>
-      <li><a href="/group/">Groups</a></li>
+      <li><a href="@{GlobalTimeline.timeline()}">Home</a></li>
+      <li><a href="@{User.profile(nickname)}">My Profile</a></li>
+      <li><a href="@{User.edit(nickname)}">Edit Profile</a></li>
+      <li><a href="@{Authentication.logout()}">Logout</a></li>
     </ul>
   </div>
   <div class="grid_19 contents box">
