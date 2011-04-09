@@ -17,6 +17,7 @@ public class UserService {
 
 	public static void storeUser(User user){
 		userDao.store(user);
+                solr.Add.addUser(user);
 	}
 	
 	public static List<Message> getMessagesByUser(User user){
