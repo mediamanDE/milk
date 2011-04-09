@@ -1,5 +1,7 @@
 package persistence.dao.api;
 
+import java.util.List;
+
 import models.Group;
 import models.Message;
 
@@ -28,19 +30,19 @@ public interface IMessageDao {
      * @param messageId
      * @return
      */
-    public Message[] getThread(String messageId);
+    public List<Message> getThread(String messageId);
 
     /**
      * Get All Messages
      * @return
      */
-    public Message[] getAllMessages();
+    public List<Message> getAllMessages();
 
     /**
      * Get All Messages by Group
      * @param group
      * @return
      */
-    public Message[] getAllMessagesByGroup(Group group);
+    public List<Message> getAllMessagesByGroup(Group group);
 
 }
