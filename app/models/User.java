@@ -13,13 +13,25 @@ public class User {
 	private List<ExternalLink> externalLinks;
 
 	public void debug() {
-		System.out.println("avatarUrl = " + getAvatarUrl());
-		System.out.println("displayname = " + getDisplayname());
-		System.out.println("fullname = " + getFullname());
-		System.out.println("nickname = " + getNickname());
-		System.out.println("openId = " + getOpenId());
-		System.out.println("postCount = " + getPostCount());
-		System.out.println("timezone = " + getTimezone());
+		
+		System.out.println("["
+				+ "openId = " + openId + ",\n"
+				+ "nickname = " + nickname + ",\n"
+				+ "fullname = " + fullname + ",\n"
+				+ "displayname = " + displayname + ",\n"
+				+ "avatarUrl = " + avatarUrl + ",\n"
+				+ "postCount = " + postCount + ",\n"
+				+ "timezone = " + timezone);
+
+		System.out.println("externalLinks = \n   [");
+		int numExternalLinks = (externalLinks != null) ? externalLinks.size() : 0;
+		for (int i = 0; i < numExternalLinks; i++) {
+			ExternalLink extLnk = externalLinks.get(i);
+			System.out.println("      [" + extLnk.getName() + " | " + extLnk.getUrl() + "]");
+		}
+		System.out.println("   ]");
+
+		System.out.println("]");
 	}
 
 	/**
