@@ -4,7 +4,7 @@ import models.Message;
 
 public class ThreadService {
 	
-	public Message[] getThreadByMessage(Message message){
+	public static Message[] getThreadByMessage(Message message){
 		return null;
 	}
 }

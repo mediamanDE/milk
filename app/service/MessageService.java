@@ -1,22 +1,18 @@
 package service;
 
+import models.Message;
 import persistence.dao.api.IMessageDao;
 import persistence.dao.impl.MessageDaoImpl;
-import models.Message;
 
 public class MessageService{
 	
-	private IMessageDao messageDao;
+	private static IMessageDao messageDao = new MessageDaoImpl();
 	
-	public MessageService() {
-		messageDao = new MessageDaoImpl();
-	}
-	
-	public Message getMessageById(final String messageId){
+	public static Message getMessageById(final String messageId){
 		return messageDao.getMessageById(messageId);
 	}
 	
-	public void deleteMessage(Message message){
+	public static void deleteMessage(Message message){
 		if(null != message){
 			message.setMessagetext("");
 			if( getMessageById(message.get_id()) != null ){
@@ -27,7 +23,7 @@ public class MessageService{
 		}
 	}
 	
-	public void storeMessage (Message message){
+	public static void storeMessage (Message message){
 		messageDao.store(message);
 	}
 }
