@@ -29,11 +29,13 @@ public class Add {
 		//docMessage.addField("author",message.getFrom().getNickname());
 		//docMessage.addField("author",message.getFrom().getTimezone());
 		
-		String categoryNameTemp = new String();
-		for (Group groupTemp : message.getGroups()) {
-			categoryNameTemp += groupTemp.getName() + " ";
+		if(message.getGroups() != null){
+			String categoryNameTemp = new String();
+			for (Group groupTemp : message.getGroups()) {
+				categoryNameTemp += groupTemp.getName() + " ";
+			}
+			docMessage.addField("category",categoryNameTemp);
 		}
-		docMessage.addField("category",categoryNameTemp);
 		
 		// Date Formater
 		//SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT_NOW);

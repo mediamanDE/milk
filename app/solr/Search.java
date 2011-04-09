@@ -28,13 +28,15 @@ public class Search {
 		return null;
 	}
 	
-	public static List<Message> SearchMessageAll(String search,boolean LazySearch){
+	public static List<Message> SearchMessageAll(String search,boolean lazy){
 		SolrQuery query = new SolrQuery();
 		
-		//????
-    //query.setQuery("*:" + search);
-		// Lazy
-    query.setQuery("description:*" + search+"*");
+		if(lazy){
+			query.setQuery("description:*" + search + "*");
+		}else{
+			query.setQuery("*:" + search);
+		}
+    
     query.addSortField("last_modified", SolrQuery.ORDER.asc);
     
 //    SolrQuery solrQuery = new  SolrQuery().
@@ -74,6 +76,28 @@ public class Search {
     }
     return null;
 	}
+	
+	public static List<Message> SearchMessageByAuthor(String search){
+SolrQuery query = new SolrQuery();
+		
+		//????
+    //query.setQuery("*:" + search);
+		// Lazy
+    query.setQuery("author:*" + search + "*");
+    query.addSortField("last_modified", SolrQuery.ORDER.asc);
+    
+    QueryResponse queryRsp = queryFromServer(query);
+    if(queryRsp != null){
+    	SolrDocumentList solrDocs = queryFromServer(query).getResults();
+      
+  		List<Message> listMessage = new ArrayList<Message>(); 
+  		for (SolrDocument solrDocument : solrDocs) {
+  			listMessage.add(getCleanMessage(solrDocument));
+  		}
+  		return listMessage;
+    }
+    return null;
+	}
 
 	public static void SearchMessage(Message message){
 		
@@ -106,6 +130,25 @@ public class Search {
 		
 	}
 	
+	public static List<User> SearchUserAll(String search){
+		SolrQuery query = new SolrQuery();
+		query.setQuery("name:*" + search + "*");
+    query.addSortField("last_modified", SolrQuery.ORDER.asc);
+    
+    QueryResponse queryRsp = queryFromServer(query);
+    if(queryRsp != null){
+    	SolrDocumentList solrDocs = queryFromServer(query).getResults();
+      
+  		List<User> listUser = new ArrayList<User>(); 
+  		for (SolrDocument solrDocument : solrDocs) {
+  			listUser.add(getCleanUser(solrDocument));
+  		}
+  			  		
+  		return listUser;
+    }
+    return null;
+	}
+	
 	public static void SearchGroup(Group group){
 		
 	}
@@ -121,6 +164,12 @@ public class Search {
 		// FIX
 		//message.setPostdate(new Date((String)solrDocument.getFieldValue("last_modified")));
 		return message;
+	}
+	
+	private static User getCleanUser(SolrDocument solrDocument){
+		User user = new User();
+		user.setFullname((String)solrDocument.getFieldValue("name"));
+		return user;
 	}
 	
 	private static QueryResponse queryFromServer(SolrQuery query){
