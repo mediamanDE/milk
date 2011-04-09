@@ -1,21 +1,30 @@
 package models;
 
 public class Group {
-    private int _id;
+
+    private int id;
     private String name;
     private String description;
-    
+
+    public void debug() {
+
+        System.out.println("[\n"
+                + "id = " + id + ",\n"
+                + "name = " + name + ",\n"
+                + "description = " + description);
+    }
+
 	/**
-	 * @return the _id
+	 * @return the id
 	 */
-	public int get_id() {
-		return _id;
+	public int getId() {
+		return id;
 	}
 	/**
-	 * @param _id the _id to set
+	 * @param id the id to set
 	 */
-	public void set_id(int _id) {
-		this._id = _id;
+	public void setId(int id) {
+		this.id = id;
 	}
 	/**
 	 * @return the name
