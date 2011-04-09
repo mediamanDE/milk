@@ -19,15 +19,15 @@ import play.mvc.With;
 @With(Authentication.class)
 public class Search extends Controller {
 	
-	public static void search() {
-		
+	public static void search(String messageText) {
 		//solr.Delete.deleteAll();
-		
-		
-		List<Message> currentMessages = solr.Search.SearchMessageAll("is", false);
+		List<Message> currentMessages = solr.Search.SearchMessageAll(messageText, false);
 		render(currentMessages);
-		
-		//render();
+	}
+	
+	public static void searchMessage(String messageText){
+		List<Message> currentMessages = solr.Search.SearchMessageAll(messageText, false);
+		render(currentMessages);
 	}
 
 }

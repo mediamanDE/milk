@@ -7,6 +7,7 @@ import play.mvc.With;
 public class Group extends Controller {
 
 	public static void overview() {
+		
 		render();
 	}
 	

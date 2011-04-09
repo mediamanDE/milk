@@ -1,61 +1,92 @@
 body {
-  background: #444 url(/public/img/cow.jpg) no-repeat bottom right;
-  color: #FFF;
-  font-size: 1em;
-  height: auto;
-  padding-bottom: 2%;
+	background: #444 url(/public/img/kanne.png) no-repeat bottom left;
+	color: #444;
+	font-size: 1em;
+	height: auto;
+	padding-bottom: 2%;
 }
-
 a {
-  color: #fff;
-  text-decoration: none;
+	color: #85aec1;
+	text-decoration: none;
 }
-
 a:hover {
-  text-decoration: underline;
+	text-decoration: underline;
 }
-
 h1 {
-  font-family: Georgia, serif;
-  font-weight: normal;
-  padding-top: 2%;
-  text-align: center;
+	font-family: Georgia, serif;
+	font-weight: normal;
+	padding-top: 2%;
+	text-align: center;
 }
-
 h2 {
-  padding-top: 2%;
-  text-align: center;
+	padding-top: 2%;
+	text-align: center;
 }
-
 p {
-  border: 1px solid #666;
-  overflow: hidden;
-  padding: 1px 0;
-  text-align: center;
+	border: 1px solid #666;
+	overflow: hidden;
+	padding: 1px 0;
+	text-align: center;
 }
-
-.container_12,
-.container_16,
-.container_24 { 
-  margin-bottom: 20px;
+.container_12, .container_16, .container_24 {
+	margin-bottom: 20px;
 }
-
 .container_12 {
 }
-
 .container_16 {
 }
-
-.container_24{
-
+.container_24 {
 }
-.block{
-	background-color: #d8e7ee;
-	color:#85aec1;
+.block {
+	/*	background-color: #d8e7ee;
+*/	color:#444;
+	background-color: #fff;
 }
-
-.contents{
-	background-color: #85aec1;
+.contents {
+/*	background-color: #85aec1;
+*/
+	min-height:450px;
+	overflow:visible;
+}
+.box {
+	background-color: #fff;
+	-moz-box-shadow: 0 0 5px #888;
+	-webkit-box-shadow: 0 0 5px #888;
+	box-shadow: 0 0 5px #888;
+	padding: 2px 5px;
+	moz-border-radius: 10px;
+	border-radius: 10px;
+}
+.header {
+	margin-bottom:1%;
+	background:url(/public/img/mm.jpg) 5% 10px no-repeat, url(/public/img/juggler.png) 90% center no-repeat,#fff;
+	min-height: 100px;
+}
+ul {
+	list-style:none;
+	padding:0;
+	margin:0;
+}
+.block li {
+	padding:0;
+	margin:0;
 	color:#444;
+}
+.block li a {
+	color:#444;
+}
 
+div.contents div, div.contents form{
+	background-color:#d8e7ee;
+	padding:2px;
+	-moz-box-shadow: 0 0 5px #85aec1;
+	-webkit-box-shadow: 0 0 5px #85aec1;
+	box-shadow: 0 0 5px #85aec1;
+	moz-border-radius: 10px;
+	border-radius: 10px;
+	margin-top:10px;
+
+}
+form fieldset legend,.quick-search-submit{
+	display:none;
 }

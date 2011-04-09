@@ -27,7 +27,7 @@ public class Server {
 	private static Boolean created = false;
 	
 	//private String url = "http://ws202-1.mediaman.local:8983/solr";
-	private String url = "http://10.15.20.65:8983/solr/admin/";
+	private String url = "http://10.15.20.65:8983/solr";
 	
 	private SolrServer server;
 	

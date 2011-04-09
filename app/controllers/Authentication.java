@@ -11,15 +11,15 @@ public class Authentication extends Controller {
 	
 	public static final String USER_ID = "UserID";
 	
-	@Before(unless={"login", "authenticateOpenID"})
+	@Before(unless={"login", "authenticateOpenID","register"})
 	public static void checkAuthenticated() {
-	    if(!session.contains("user")) {
-	    	login();
+	    if(!session.contains(USER_ID)) {
+	        login();
 	    }
 	}
 	     
 	public static void login() {
-		if(!session.contains("user")) {
+		if(!session.contains(USER_ID)) {
 			render();
 		}else{
 			Redirect.in_app("GlobalTimeline.timeline");
@@ -37,8 +37,9 @@ public class Authentication extends Controller {
 	        if(verifiedUser == null) {
 	            flash.error("Oops. Authentication has failed");
 	            login();
-	        } 
+	        }
 	        if(UserService.getUserByOpenId(verifiedUser.id) == null){
+	        	session.put(USER_ID + "_temp", verifiedUser.id);
 				Redirect.in_app("Register.register");
 	        }else{
 	        	session.put(USER_ID, verifiedUser.id);

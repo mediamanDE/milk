@@ -19,9 +19,9 @@ public interface IDBConstants {
 	public static final String FIELD_USER_AVATARURL = "avatarurl";
 	public static final String FIELD_USER_POSTCOUNT = "postcount";
 	public static final String FIELD_USER_TIMEZONE = "timezone";
-//	public static final String FIELD_USER_EXTERNALLINKS = "";
-//	public static final String FIELD_USER_EXTERNALLINKS_NAME = "";
-//	public static final String FIELD_USER_EXTERNALLINKS_URL = "";
+	public static final String FIELD_USER_EXTERNALLINKS = "externallinks";
+	public static final String FIELD_USER_EXTERNALLINKS_NAME = "name";
+	public static final String FIELD_USER_EXTERNALLINKS_URL = "url";
 
 	public static final String COLLECTION_MESSAGES = "messages";
 	public static final String FIELD_MESSAGE_ID = "_id";
