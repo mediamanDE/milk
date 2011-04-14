@@ -6,45 +6,39 @@ import java.util.List;
 import service.MessageService;
 
 public class Message {
-    private String id;
-    private Date postdate;
-    private List<Group> groups;
-    private List<String> ancestorIds;
-    private String messagetext;
-    private User from;
+	private String id;
+	private Date postdate;
+	private List<Group> groups;
+	private List<String> ancestorIds;
+	private String messagetext;
+	private User from;
 
-
-	public void debug() {
-		
-		System.out.println("[\n"
-				+ "_id = " + id + ",\n"
-				+ "postdate = " + postdate + ",\n"
-				+ "messagetext = " + messagetext);
-
-		System.out.println("groups = \n   [");
-		int numGroups = (groups != null) ? groups.size() : 0;
-		for (int i = 0; i < numGroups; i++) {
-			Group grp = groups.get(i);
-			System.out.println("      [name = " + grp.getName() + "]");
+	/**
+	 * @return String representation of the object
+	 */
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder("Message [\n");
+		sb.append("_id=").append(id).append(",\n");
+		sb.append("postdate=").append(postdate).append(",\n");
+		sb.append("messagetext=").append(messagetext).append(",\n");
+		sb.append("groups=[\n");
+		for (Group group : groups) {
+			sb.append("      [name = ").append(group.getName());
 		}
-		System.out.println("   ]");
-
-		System.out.println("ancestors = \n   [");
-		int numAncestors = (ancestorIds != null) ? ancestorIds.size() : 0;
-		for (int i = 0; i < numAncestors; i++) {
-			Message msg = MessageService.getMessageById(ancestorIds.get(i));
-			System.out.println("      [_id = " + msg.getId() + " | postdate = " + msg.getPostdate() + "]");
+		sb.append("\n]");
+		sb.append("ancestors=[\n");
+		for (String ancestorId : ancestorIds) {
+			Message msg = MessageService.getMessageById(ancestorId);
+			sb.append("      [_id = ").append(msg.getId());
+			sb.append(" | postdate = ").append(msg.getPostdate()).append("]");
 		}
-		System.out.println("   ]");
-
-		System.out.println("from =/n   ["
-				+ "      openId = " + from.getOpenId() + ",\n"
-				+ "      nickname = " + from.getNickname() + ",\n"
-				+ "      fullname = " + from.getFullname() + ",\n"
-				+ "      displayname = " + from.getDisplayname() + ",\n"
-				+ "   ]");
-
-		System.out.println("]");
+		sb.append("\n]\nfrom =/n   [      openId = ");
+		sb.append("openId=").append(from.getOpenId()).append(",\n");
+		sb.append("nickname=").append(from.getNickname()).append(",\n");
+		sb.append("fullname=").append(from.getFullname()).append(",\n");
+		sb.append("displayname=").append(from.getDisplayname()).append("\n]");
+		return sb.toString();
 	}
 
 	/**
@@ -53,71 +47,88 @@ public class Message {
 	public String getId() {
 		return id;
 	}
+
 	/**
-	 * @param _id the _id to set
+	 * @param _id
+	 *            the _id to set
 	 */
 	public void setId(String id) {
 		this.id = id;
 	}
+
 	/**
 	 * @return the postdate
 	 */
 	public Date getPostdate() {
 		return postdate;
 	}
+
 	/**
-	 * @param postdate the postdate to set
+	 * @param postdate
+	 *            the postdate to set
 	 */
 	public void setPostdate(Date postdate) {
 		this.postdate = postdate;
 	}
+
 	/**
 	 * @return the groups
 	 */
 	public List<Group> getGroups() {
 		return groups;
 	}
+
 	/**
-	 * @param groups the groups to set
+	 * @param groups
+	 *            the groups to set
 	 */
 	public void setGroups(List<Group> groups) {
 		this.groups = groups;
 	}
+
 	/**
 	 * @return the ancestors
 	 */
 	public List<String> getAncestors() {
 		return ancestorIds;
 	}
+
 	/**
-	 * @param ancestors the ancestors to set
+	 * @param ancestors
+	 *            the ancestors to set
 	 */
 	public void setAncestors(List<String> ancestors) {
 		this.ancestorIds = ancestors;
 	}
+
 	/**
 	 * @return the messagetext
 	 */
 	public String getMessagetext() {
 		return messagetext;
 	}
+
 	/**
-	 * @param messagetext the messagetext to set
+	 * @param messagetext
+	 *            the messagetext to set
 	 */
 	public void setMessagetext(String messagetext) {
 		this.messagetext = messagetext;
 	}
+
 	/**
 	 * @return the from
 	 */
 	public User getFrom() {
 		return from;
 	}
+
 	/**
-	 * @param from the from to set
+	 * @param from
+	 *            the from to set
 	 */
 	public void setFrom(User from) {
 		this.from = from;
 	}
-    
+
 }

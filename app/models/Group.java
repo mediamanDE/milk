@@ -1,18 +1,24 @@
 package models;
 
+import service.MessageService;
+
 public class Group {
 
     private int id;
     private String name;
     private String description;
-
-    public void debug() {
-
-        System.out.println("[\n"
-                + "id = " + id + ",\n"
-                + "name = " + name + ",\n"
-                + "description = " + description);
-    }
+    
+	/**
+	 * @return String representation of the object
+	 */
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder("Group [\n");
+		sb.append("_id=").append(id).append(",\n");
+		sb.append("name=").append(name).append(",\n");
+		sb.append("description=").append(description).append("\n]");
+		return sb.toString();
+	}
 
 	/**
 	 * @return the id
