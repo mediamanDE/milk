@@ -89,13 +89,16 @@ public class UserDaoImpl extends BaseDao implements IUserDao {
 	public User getByOpenId(String openId) {
 		User returnUser = null;
 
-		DB db = getDatabase();
-		DBCollection coll = db.getCollection(COLLECTION_USERS);
-		BasicDBObject result;
-
+		DBCollection coll = getDatabase().getCollection(COLLECTION_USERS);
+		if ( coll == null ) {
+			LOG.warn("Collection returned from mongoDB is 'null'! Can't continue!");
+			return null;
+		}
+		
 		BasicDBObject query = new BasicDBObject();
 		query.put(FIELD_USER_OPENID, openId);
-		result = (BasicDBObject) coll.findOne(query);
+		BasicDBObject result = (BasicDBObject) coll.findOne(query);
+		
 		if (result != null) {
 
 			returnUser = new User();
