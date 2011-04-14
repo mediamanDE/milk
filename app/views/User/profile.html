@@ -1,10 +1,9 @@
 #{extends 'mediaman.html' /}
-#{set nickname:username /}
-#{set title:"Profile " + username /}
+#{set title:"Profile " + nickname /}
 
 <h2>Personal Timeline</h2> 
 
-<form action="@{sendMessage()}" method="POST">
+<form action="@{GlobalTimeline.sendMessage()}" method="POST">
     <label for="user">Enter your Message :</label>
     <input type="text" name="messageText" id="messageText" /></br>
     <label for="groups">Enter the Message Groups :</label>
@@ -44,4 +43,4 @@ Display Name: ${currentUser.displayname} <br/>
 Full Name: ${currentUser.fullname} <br/>
 Nickname: ${currentUser.nickname} <br/>
 
-<a href="@{User.edit(nickname)}">Edit Profile</a>
+<a href="@{User.edit(currentUser.nickname)}">Edit Profile</a>

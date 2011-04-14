@@ -24,8 +24,9 @@ div#header a { color:white; text-decoration:none; }
 div#header ul.navigation { list-style-type:none; margin:0; display:inline; }
 div#header ul.navigation li { display:inline; }
 
-form#message-form ul { list-style-type: none; }
+div#content { padding:10px;}
 
+form#message-form ul { list-style-type: none; }
 
 div.message ul.message-metadata { list-style-type: none; }
 div.message ul.message-metadata li { display: inline; color:#999; font-size:0.75em; }

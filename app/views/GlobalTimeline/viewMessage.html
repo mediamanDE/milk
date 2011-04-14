@@ -8,7 +8,7 @@
     
     <ul class="message-metadata">
         <li class="message-author">
-            by ${message.from.displayname}
+            by <a href="@{User.profile(message.from.nickname)}">${message.from.displayname}</a>
         </li>
         <li class="message-date" title="${message.postdate}">
             | on <a href="@{viewMessage(message.id)}">${message.postdate}</a>
