@@ -27,6 +27,19 @@ public class TimelineService {
     }
 
     /**
+     * 
+     * @param orderBy
+     * @return
+     */
+    public static List<Message> getAllMessages(int limit, int offset, String orderBy) {
+
+        List<Message> messagesArray = new ArrayList<Message>();
+        messagesArray = messageDao.getLimitedMessages(limit, offset, orderBy);
+            
+        return messagesArray;
+
+    }
+    /**
      *
      * @return
      */

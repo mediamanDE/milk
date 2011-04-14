@@ -45,4 +45,15 @@ public interface IMessageDao {
      */
     public List<Message> getAllMessagesByGroup(Group group);
 
+    /**
+     * Get a Lsit of Messages, limited by <limit> starts at <offset>
+     *
+     * @param limit int
+     * @param offset int
+     * @return List of Messages
+     */
+    public List<Message> getLimitedMessages(int limit, int offset, String order);
+
+
+
 }

@@ -134,20 +134,7 @@ public class MessageDaoImpl extends BaseDao implements IMessageDao {
         // field: which field(s)
         DBCursor cursor = coll.find(query,field).sort(sortfield);
 
-        while (cursor.hasNext()) {
-
-            BasicDBObject obj = (BasicDBObject) cursor.next();
-
-            Message myMessage = new Message();
-            messageId = obj.getString(FIELD_MESSAGE_ID);
-
-            myMessage = getMessageById(messageId);
-            
-            if (null != myMessage) {
-                messagesArray.add(myMessage);
-            }
-
-        }
+        messagesArray = getMessages(cursor);
 
         return messagesArray;
 
@@ -157,5 +144,64 @@ public class MessageDaoImpl extends BaseDao implements IMessageDao {
     public List<Message> getAllMessagesByGroup(Group group) {
         // TODO Auto-generated method stub
         return null;
+    }
+
+    @Override
+    public List<Message> getLimitedMessages(int limit, int offset, String orderBy) {
+
+        // db.messages.find().sort({'postdate':-1}).skip(4).limit(2)
+        int order = ("ASC" == orderBy) ? 1 : -1;
+
+        List<Message> messagesArray = new ArrayList<Message>();
+
+        DB db = getDatabase();
+        DBCollection coll = db.getCollection(COLLECTION_MESSAGES);
+
+        BasicDBObject query = new BasicDBObject();
+        BasicDBObject field = new BasicDBObject();
+        BasicDBObject sortfield = new BasicDBObject();
+
+        field.put(FIELD_MESSAGE_POSTDATE, order);
+        field.put(FIELD_MESSAGE_ID, order);
+
+        sortfield.put(FIELD_MESSAGE_POSTDATE, order);
+
+// query: where
+        // field: which field(s)
+        DBCursor cursor = coll.find(query,field).sort(sortfield).skip(offset).limit(limit);
+
+        messagesArray = getMessages(cursor);
+
+        return messagesArray;
+
+    }
+
+    /**
+     * Get a List of Messages for given cursor.
+     * @param cursor
+     * @return
+     */
+    private List<Message> getMessages(DBCursor cursor) {
+
+        String messageId = null;
+        List<Message> messagesArray = new ArrayList<Message>();
+
+        while (cursor.hasNext()) {
+
+            BasicDBObject obj = (BasicDBObject) cursor.next();
+
+            Message myMessage = new Message();
+            messageId = obj.getString(FIELD_MESSAGE_ID);
+
+            myMessage = getMessageById(messageId);
+
+            if (null != myMessage) {
+                messagesArray.add(myMessage);
+            }
+
+        }
+
+        return messagesArray;
+
     }
 }
