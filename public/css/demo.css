@@ -90,3 +90,8 @@ div.contents div, div.contents form{
 form fieldset legend,.quick-search-submit{
 	display:none;
 }
+
+#messageText {
+    width: 95%;
+    height: 75px;
+}
