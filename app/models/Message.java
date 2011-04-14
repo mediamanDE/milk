@@ -2,7 +2,6 @@ package models;
 
 import java.util.Date;
 import java.util.List;
-
 import service.MessageService;
 
 public class Message {
@@ -101,6 +100,15 @@ public class Message {
 	public String getMessagetext() {
 		return messagetext;
 	}
+
+        public String getMessagetext(boolean pareseHtml) {
+            
+            // Todo: parse Messagetext in a proper way!
+            String parsedMessge = messagetext.replaceAll("\r\n", "\n").replaceAll("\n", "<br />");
+            return parsedMessge;
+            
+        }
+
 	/**
 	 * @param messagetext the messagetext to set
 	 */

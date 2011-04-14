@@ -19,7 +19,10 @@
         <hr/>
         <div class="message">
             <div class="message-text">
-            	${entity.getMessagetext()}
+                %{
+                   message = entity.getMessagetext(true);
+                }%
+            	${message.raw()}
             </div>
             
             <div class="message-metadata">
