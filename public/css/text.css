@@ -9,10 +9,7 @@
 ----------------------------------------------------------------------------------------------------*/
 
 body {
-  font-size: 0.69em;
-  font-family: 'Droid Sans', serif;
-  font-weight: regular;
- 
+  font: 0.85em Helvetica,Verdana,Arial,Tahoma,sans-serif; 
 }
 
 hr {
@@ -25,29 +22,13 @@ hr {
 /* `Headings
 ----------------------------------------------------------------------------------------------------*/
 
-h1 {
-  font-size: 1.5em;
-}
-
-h2 {
-  font-size: 1.4em;
-}
-
-h3 {
-  font-size: 1.3em;
-}
-
-h4 {
-  font-size: 1.2em;
-}
-
-h5 {
-  font-size: 1.1em;
-}
-
-h6 {
-  font-size: 1.05em;
-}
+div#header { font-size: 0.75em; }
+h1 { font-size: 1.5em; }
+h2 { font-size: 1.4em; } 
+h3 { font-size: 1.3em; }
+h4 { font-size: 1.2em; }
+h5 { font-size: 1.1em; }
+h6 { font-size: 1.05em; }
 
 /* `Spacing
 ----------------------------------------------------------------------------------------------------*/

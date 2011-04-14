@@ -9,7 +9,7 @@
 	<meta name="format-detection" content="telephone=no" />
 	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
 	<title>#{get 'title' /}</title>
-	<link rel="stylesheet" href="@{'/public/css/reset.css'}" />
+	<link rel="stylesheet" href="@{'/public/css/min/reset.css'}" />
 	<link rel="stylesheet" href="@{'/public/css/text.css'}" />
 	<link rel="stylesheet" href="@{'/public/css/960_24_col.css'}" />
 	<link rel="stylesheet" href="@{'/public/css/demo.css'}" />
@@ -27,11 +27,9 @@
         #{/if}
     </div>
 
-	<div class="container_24">
-	  <div class="grid_19 contents box">
-	    <h1>#{get 'title' /}</h1>
-	    #{doLayout /} </div>
-	  <div class="clear"></div>
-	</div>
+	<div class="contents box">
+		<h1>#{get 'title' /}</h1>
+		#{doLayout /} 
+    </div>
 </body>
 </html>

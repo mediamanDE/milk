@@ -49,8 +49,7 @@ public class MessageDaoImpl extends BaseDao implements IMessageDao {
 
 			mongoMessage.put(FIELD_MESSAGE_FROM, message.getFrom().getOpenId());
 			// mongoMessage.put(FIELD_MESSAGE_GROUPS, message.getGroups());
-			mongoMessage.put(FIELD_MESSAGE_MESSAGETEXT,
-					message.getMessagetext());
+			mongoMessage.put(FIELD_MESSAGE_MESSAGETEXT, message.getMessagetext());
 			mongoMessage.put(FIELD_MESSAGE_POSTDATE, message.getPostdate());
 
 			coll.insert(mongoMessage);
@@ -64,6 +63,10 @@ public class MessageDaoImpl extends BaseDao implements IMessageDao {
 		LOG.warn("Message.delete() NOT IMPLEMENTED YET!");
 	}
 
+	/**
+	 * @return a Message object that's specified by the given messageId,
+	 * 		maybe null 
+	 */
 	@Override
 	public Message getMessageById(final String messageId) {
 		Message returnMessage = null;
@@ -80,34 +83,23 @@ public class MessageDaoImpl extends BaseDao implements IMessageDao {
 			Map resultMap = result.toMap();
 
 			returnMessage = new Message();
-			returnMessage.setId(((ObjectId) resultMap.get(FIELD_MESSAGE_ID))
-					.toString());
+			returnMessage.setId(((ObjectId) resultMap.get(FIELD_MESSAGE_ID)).toString());
 
-			BasicDBList list = (BasicDBList) result
-					.get(FIELD_MESSAGE_ANCESTORS);
-			int sizeAncestorIds = (list != null) ? list.size() : 0;
-			if (sizeAncestorIds > 0) {
-
-				List<String> ancestorIds = new ArrayList<String>(
-						sizeAncestorIds);
-
-				for (int i = 0; i < sizeAncestorIds; i++) {
-					String dbAncestorId = (String) list.get(i);
-					ancestorIds.add(dbAncestorId);
+			BasicDBList ancestors = (BasicDBList) result.get(FIELD_MESSAGE_ANCESTORS);
+			if ( ancestors != null && ancestors.size() > 0) {
+				List<String> ancestorIds = new ArrayList<String>(ancestors.size());
+				for ( Object ancestorId: ancestors.toArray() ) {
+					ancestorIds.add((String) ancestorId);
 				}
 				returnMessage.setAncestors(ancestorIds);
 			}
 
-			returnMessage
-					.setFrom((User) UserService
-							.getUserByOpenId((String) resultMap
-									.get(FIELD_MESSAGE_FROM)));
+			User fromUsr = UserService.getUserByOpenId((String) resultMap.get(FIELD_MESSAGE_FROM));
+			returnMessage.setFrom(fromUsr);
 			// returnMessage.setGroups((String)
 			// resultMap.get(FIELD_MESSAGE_GROUPS));
-			returnMessage.setMessagetext((String) resultMap
-					.get(FIELD_MESSAGE_MESSAGETEXT));
-			returnMessage.setPostdate((Date) resultMap
-					.get(FIELD_MESSAGE_POSTDATE));
+			returnMessage.setMessagetext((String) resultMap.get(FIELD_MESSAGE_MESSAGETEXT));
+			returnMessage.setPostdate((Date) resultMap.get(FIELD_MESSAGE_POSTDATE));
 		}
 		return returnMessage;
 	}

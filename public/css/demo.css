@@ -3,9 +3,7 @@ html, body {
 	padding: 0;
 }
 
-body {
-    font: 11px/16px Arial,Tahoma,Helvetica,Verdana,sans-serif;
-}
+body { font: 0.85em Helvetica,Verdana,Arial,Tahoma,sans-serif; }
 
 div#header {
 	background-color: #444;
@@ -26,6 +24,14 @@ div#header a { color:white; text-decoration:none; }
 div#header ul.navigation { list-style-type:none; margin:0; display:inline; }
 div#header ul.navigation li { display:inline; }
 
+form#message-form ul { list-style-type: none; }
+
+
+div.message ul.message-metadata { list-style-type: none; }
+div.message ul.message-metadata li { display: inline; color:#999; font-size:0.75em; }
+div.message ul.message-metadata li a { color:#999; }
+
+
 fieldset {
 	display: block;
 	-webkit-margin-start: 2px;
@@ -42,99 +48,44 @@ fieldset {
 .quick-search-submit { display: none; }
 
 
-/* --------above is new, below is old ------------------------------------------- */
+/* `Headings
+----------------------------------------------------------------------------------------------------*/
 
+div#header { font-size: 0.75em; }
+h1 { font-size: 1.5em; }
+h2 { font-size: 1.4em; } 
+h3 { font-size: 1.3em; }
+h4 { font-size: 1.2em; }
+h5 { font-size: 1.1em; }
+h6 { font-size: 1.05em; }
 
-/*
-body {
-	background: #444 url(/public/img/kanne.png) no-repeat bottom left;
-	color: #444;
-	font-size: 1em;
-	height: auto;
-	padding-bottom: 2%;
-}
-a {
-	color: #85aec1;
-	text-decoration: none;
-}
-a:hover {
-	text-decoration: underline;
-}
-h1 {
-	font-family: Georgia, serif;
-	font-weight: normal;
-	padding-top: 2%;
-	text-align: center;
-}
-h2 {
-	padding-top: 2%;
-	text-align: center;
-}
-p {
-	border: 1px solid #666;
-	overflow: hidden;
-	padding: 1px 0;
-	text-align: center;
-}
-.container_12, .container_16, .container_24 {
-	margin-bottom: 20px;
-}
-.container_12 {
-}
-.container_16 {
-}
-.container_24 {
-}
-.block {
-	color:#444;
-	background-color: #fff;
-}
-.contents {
-	min-height:450px;
-	overflow:visible;
+/* `Spacing
+----------------------------------------------------------------------------------------------------*/
+
+ol {
+  list-style: decimal;
 }
 
-.box {
-	background-color: #fff;
-	-moz-box-shadow: 0 0 5px #888;
-	-webkit-box-shadow: 0 0 5px #888;
-	box-shadow: 0 0 5px #888;
-	padding: 2px 5px;
-	moz-border-radius: 10px;
-	border-radius: 10px;
-}
-.header {
-	margin-bottom:1%;
-	background:url(/public/img/mm.jpg) 5% 10px no-repeat, url(/public/img/juggler.png) 90% center no-repeat,#fff;
-	min-height: 100px;
-}
 ul {
-	list-style:none;
-	padding:0;
-	margin:0;
-}
-.block li {
-	padding:0;
-	margin:0;
-	color:#444;
-}
-.block li a {
-	color:#444;
+  list-style: disc;
 }
 
-div.contents div, div.contents form{
-	background-color:#d8e7ee;
-	padding:2px;
-	-moz-box-shadow: 0 0 5px #85aec1;
-	-webkit-box-shadow: 0 0 5px #85aec1;
-	box-shadow: 0 0 5px #85aec1;
-	moz-border-radius: 10px;
-	border-radius: 10px;
-	margin-top:10px;
 
+p,
+dl,
+hr,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+ol,
+ul,
+pre,
+table,
+address,
+fieldset,
+figure {
+  margin-bottom: 20px;
 }
-form fieldset legend,.quick-search-submit{
-	display:none;
-}
-
-*/
