@@ -48,6 +48,33 @@ public class TimelineService {
     }
 
     /**
+     * Get a limited list of messages posted by a user specified by his openID
+     * 
+     * @param openId
+     * @param limit
+     * @param offset
+     * @param orderBy
+     * @return
+     */
+    public static List<Message> getMessagesByOpenId(String openId, int limit, int offset, String orderBy) {
+
+        List<Message> messagesArray = new ArrayList<Message>();
+        messagesArray = messageDao.getMessagesByOpenId(openId, limit, offset, orderBy);
+
+        return messagesArray;
+
+    }
+
+    public static List<Message> getMessagesByOpenId(String openId) {
+
+        List<Message> messagesArray = new ArrayList<Message>();
+        messagesArray = messageDao.getMessagesByOpenId(openId, 0, 0, "DESC");
+
+        return messagesArray;
+
+    }
+
+    /**
      * Retrieve all Messages according a specified Group
      * 
      * @param group

@@ -54,6 +54,8 @@ public interface IMessageDao {
      */
     public List<Message> getLimitedMessages(int limit, int offset, String order);
 
+    public List<Message> getMessagesByOpenId(String openId, int limit, int offset, String order);
+
 
 
 }

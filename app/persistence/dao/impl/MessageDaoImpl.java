@@ -113,7 +113,7 @@ public class MessageDaoImpl extends BaseDao implements IMessageDao {
     @Override
     public List<Message> getAllMessages(String orderBy) {
 
-        int order = ("ASC" == orderBy) ? 1 : -1;
+        int order = ("ASC".matches(orderBy)) ? 1 : -1;
 
         String messageId = null;
         List<Message> messagesArray = new ArrayList<Message>();
@@ -150,7 +150,7 @@ public class MessageDaoImpl extends BaseDao implements IMessageDao {
     public List<Message> getLimitedMessages(int limit, int offset, String orderBy) {
 
         // db.messages.find().sort({'postdate':-1}).skip(4).limit(2)
-        int order = ("ASC" == orderBy) ? 1 : -1;
+        int order = ("ASC".matches(orderBy)) ? 1 : -1;
 
         List<Message> messagesArray = new ArrayList<Message>();
 
@@ -175,6 +175,38 @@ public class MessageDaoImpl extends BaseDao implements IMessageDao {
         return messagesArray;
 
     }
+
+    @Override
+    public List<Message> getMessagesByOpenId(String openId, int limit, int offset, String orderBy) {
+
+        // db.messages.find().sort({'postdate':-1}).skip(4).limit(2)
+        int order = ("ASC".matches(orderBy)) ? 1 : -1;
+
+        List<Message> messagesArray = new ArrayList<Message>();
+
+        DB db = getDatabase();
+        DBCollection coll = db.getCollection(COLLECTION_MESSAGES);
+
+        BasicDBObject query = new BasicDBObject();
+        BasicDBObject field = new BasicDBObject();
+        BasicDBObject sortfield = new BasicDBObject();
+
+        query.put(FIELD_MESSAGE_FROM, openId);
+        field.put(FIELD_MESSAGE_POSTDATE, order);
+        field.put(FIELD_MESSAGE_ID, order);
+
+        sortfield.put(FIELD_MESSAGE_POSTDATE, order);
+
+        // query: where
+        // field: which field(s)
+        DBCursor cursor = coll.find(query,field).sort(sortfield).skip(offset).limit(limit);
+
+        messagesArray = getMessages(cursor);
+
+        return messagesArray;
+
+    }
+
 
     /**
      * Get a List of Messages for given cursor.
