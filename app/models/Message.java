@@ -104,8 +104,11 @@ public class Message {
         public String getMessagetext(boolean pareseHtml) {
             
             // Todo: parse Messagetext in a proper way!
-            String parsedMessge = messagetext.replaceAll("\r\n", "\n").replaceAll("\n", "<br />");
-            return parsedMessge;
+            // escape html and add linebreaks.
+            String parsedMessage = messagetext.replaceAll("<", "&lt;").replaceAll("<>", "&gt;");
+            parsedMessage = parsedMessage.replaceAll("\r\n", "\n").replaceAll("\n", "<br />");
+
+            return parsedMessage;
             
         }
 
