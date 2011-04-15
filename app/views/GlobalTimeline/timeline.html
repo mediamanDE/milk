@@ -27,7 +27,10 @@
             
             <div class="message-metadata">
                 <span class="message-author">
-                        
+                    %{
+                    user = entity.getFrom();
+                    }%
+                    ${user.getDisplayname()}
                 </span>
                 <span class="message-date">
                         
