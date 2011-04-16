@@ -1,0 +1,22 @@
+#{extends 'mediaman.html' /}
+#{set title:"View Message"  /}
+
+<div class="message">
+    <div class="message-text">
+    	${message.messagetext}
+    </div>
+    
+    <ul class="message-metadata">
+        <li class="message-author">
+            by <a href="@{User.profile(message.from.nickname)}">${message.from.displayname}</a>
+        </li>
+        <li class="message-date" title="${message.postdate}">
+            | on <a href="@{viewMessage(message.id)}">${message.postdate}</a>
+        </li>
+        <li class="message-groups">
+            #{list items:message.groups, as:grp}
+                ${grp.name}
+            #{/list}
+        </li>
+    </ul>
+</div>

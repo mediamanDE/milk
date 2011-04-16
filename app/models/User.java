@@ -12,28 +12,6 @@ public class User {
 	private String timezone;
 	private List<ExternalLink> externalLinks;
 
-	public void debug() {
-		
-		System.out.println("[\n"
-				+ "openId = " + openId + ",\n"
-				+ "nickname = " + nickname + ",\n"
-				+ "fullname = " + fullname + ",\n"
-				+ "displayname = " + displayname + ",\n"
-				+ "avatarUrl = " + avatarUrl + ",\n"
-				+ "postCount = " + postCount + ",\n"
-				+ "timezone = " + timezone);
-
-		System.out.println("externalLinks = \n   [");
-		int numExternalLinks = (externalLinks != null) ? externalLinks.size() : 0;
-		for (int i = 0; i < numExternalLinks; i++) {
-			ExternalLink extLnk = externalLinks.get(i);
-			System.out.println("      [name = " + extLnk.getName() + " | url = " + extLnk.getUrl() + "]");
-		}
-		System.out.println("   ]");
-
-		System.out.println("]");
-	}
-
 	/**
 	 * @return the openId
 	 */
@@ -129,5 +107,25 @@ public class User {
 	 */
 	public void setExternalLinks(List<ExternalLink> externalLinks) {
 		this.externalLinks = externalLinks;
+	}
+
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder("User [\n");
+		sb.append("openId=").append(openId).append(",\n");
+		sb.append("nickname=").append(nickname).append(",\n");
+		sb.append("fullname=").append(fullname).append(",\n");
+		sb.append("displayname=").append(displayname).append(",\n");
+		sb.append("avatarUrl=").append(avatarUrl).append(",\n");
+		sb.append("postCount=").append(postCount).append(",\n");
+		sb.append("timezone=").append(timezone).append(",\n");
+		sb.append("postCount=").append(postCount).append(",\n");
+		sb.append("[\n");
+		for ( ExternalLink extLink: externalLinks) {
+			sb.append("      [name = ").append(extLink.getName());
+			sb.append(" | url = ").append(extLink.getUrl()).append("]");
+		}
+		sb.append("\n]");
+		return sb.toString();
 	}
 }

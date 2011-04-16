@@ -1,14 +1,21 @@
 #{extends 'mediaman.html' /}
 #{set title:"Global Timeline"  /}
-#{set nickname:username /}
-<form action="@{sendMessage()}" method="POST">
-    <div><label for="user">Enter your Message :</label></div>
-    <div><textarea name="messageText" id="messageText"></textarea></div>
-    </br />
-    <label for="groups">Enter the Message Groups :</label>
-    <input type="text" name="messageGroups" id="messageGroups">
-    <br />
-    <input type="submit" value="send..." />
+
+<form action="@{sendMessage()}" method="POST" id="message-form">
+    <ul>
+	    <li>
+		    <textarea name="messageText" id="messageText" placeholder="What are you doing?"></textarea>
+	    </li>
+	    <!-- 
+	    <li>
+		    <label for="groups">Groups :</label>
+		    <input type="text" name="messageGroups" id="messageGroups">
+		</li>
+		 -->
+	    <li>
+	        <input type="submit" value="Send..." />
+	    </li>
+    </ul>
 </form>
 
 #{if flash.error}
@@ -16,31 +23,28 @@
 #{/if}
 
 #{list items:currentMessages, as:'entity'}
-        <hr/>
-        <div class="message">
-            <div class="message-text">
+<div class="message">
+    <div class="message-text">
                 %{
                    message = entity.getMessagetext(true);
                 }%
             	${message.raw()}
             </div>
-            
-            <div class="message-metadata">
-                <span class="message-author">
-                    %{
-                    user = entity.getFrom();
-                    }%
-                    ${user.getDisplayname()}
-                </span>
-                <span class="message-date">
-                        
-                </span>
-                <div class="message-groups">
-                        
-                </div>
-            </div>
-        </div>
-        
+    
+    <ul class="message-metadata">
+        <li class="message-author">
+            by <a href="@{User.profile(entity.from.nickname)}">${entity.from.displayname}</a>
+        </li>
+        <li class="message-date" title="${entity.postdate}">
+            | on <a href="@{viewMessage(entity.id)}">${entity.postdate}</a>
+        </li>
+        <li class="message-groups">
+            #{list items:entity.groups, as:grp}
+                ${grp.name}
+            #{/list}
+        </li>
+    </ul>
+</div>
 #{/list}
 
 

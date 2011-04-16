@@ -20,8 +20,8 @@ GET		/register/									Register.register
 GET     /public/                                    staticDir:public
 
 GET     /                                           GlobalTimeline.timeline
-GET     /{username}                                 User.profile
-GET     /{username}/edit                            User.edit
+GET     /{nickname}                                 User.profile
+GET     /{nickname}/edit                            User.edit
 
 # Catch all
 *       /{controller}/{action}                      {controller}.{action}

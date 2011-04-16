@@ -11,6 +11,12 @@ public class MessageService{
 	
 	private static IMessageDao messageDao = new MessageDaoImpl();
 	
+	/**
+	 * 
+	 * @param messageId
+	 * @return a Message object that's specified by the given messageId,
+	 * 		maybe null	
+	 */
 	public static Message getMessageById(final String messageId){
 		return messageDao.getMessageById(messageId);
 	}

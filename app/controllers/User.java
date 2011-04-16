@@ -15,19 +15,32 @@ import utils.Redirect;
 @With(Authentication.class)
 public class User extends Controller {
 
-	public static void profile(String username) {
-		
+	/**
+	 * 
+	 * @param nickname
+	 */
+	public static void profile(String nickname) {
 		models.User currentUser = UserService.getUserByOpenId(session.get(Authentication.USER_ID));
 		List<Message> currentMessages = UserService.getMessagesByUser(currentUser);
-		render(username, currentUser, currentMessages );
-		
+		render(currentUser, currentMessages );
 	}
 
-	public static void edit(String username) {
+	/**
+	 * 
+	 * @param nickname
+	 */
+	public static void edit(String nickname) {
 		models.User currentUser = UserService.getUserByOpenId(session.get(Authentication.USER_ID));
-		render(username,currentUser);
+		render(currentUser);
 	}
 	
+	/**
+	 * 
+	 * @param avatarURL
+	 * @param displayname
+	 * @param fullname
+	 * @param nickname
+	 */
 	public static void saveChanges(String avatarURL,String displayname,String fullname, String nickname){
 		
 		models.User currentUser = UserService.getUserByOpenId(session.get(Authentication.USER_ID));
@@ -41,33 +54,12 @@ public class User extends Controller {
 			UserService.storeUser(currentUser);
 			
 			Map<String, Object> args = new HashMap<String, Object>();
-			args.put("username", currentUser.getDisplayname());
+			args.put("nickname", currentUser.getNickname());
 			Redirect.in_app("User.edit", args);
 		}else{
 			throw new NotFound("User does not exist");
 		}
 		
-	}
-
-	public static void sendMessage(String messageText, String messageGroups) {
-
-		validation.required(messageText);
-		if (validation.hasErrors()) {
-			for (play.data.validation.Error error : validation.errors()) {
-				flash.error(error.message());
-			}
-			render();
-		} else {
-
-			Message actualMessage = new Message();
-
-			actualMessage.setMessagetext(messageText);
-			actualMessage.setFrom(UserService.getUserByOpenId(session.get(Authentication.USER_ID)));
-
-			MessageService.storeMessage(actualMessage);
-
-			render();
-		}
 	}
 
 }

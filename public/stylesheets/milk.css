@@ -1,0 +1,82 @@
+html, body { margin: 0; padding: 0; }
+body { font: 0.85em Helvetica,Verdana,Arial,Tahoma,sans-serif; background-color: #F8FAFB;}
+
+div#content { padding:10px;}
+
+/* `Header
+----------------------------------------------------------------------------------------------------*/
+div#header {
+    background-color: #444;
+    color: white;
+    font-weight: bold;
+    letter-spacing: 0.1em;
+    border-bottom-width: 3px;
+    border-bottom-style: solid;
+    border-bottom-color: #87AFC1;
+    margin: 0 0 20px;
+    padding: 0 10px;
+    min-height: 2em;
+    line-height: 2;
+}
+div#header a { color:white; text-decoration:none; }
+div#header ul.navigation { list-style-type:none; margin:0; display:inline; }
+div#header ul.navigation li { display:inline; }
+
+
+/* `Message Form and List
+----------------------------------------------------------------------------------------------------*/
+form#message-form ul { list-style-type: none; }
+
+div.message ul.message-metadata { list-style-type: none; }
+div.message ul.message-metadata li { display: inline; color:#999; font-size:0.75em; }
+div.message ul.message-metadata li a { color:#999; }
+
+
+/* `Quick Search
+----------------------------------------------------------------------------------------------------*/
+#quick-search fieldset { float: right; border: none; margin: 0; padding: 0;}
+.quick-search legend { display: none; }
+.quick-search-submit { display: none; }
+
+
+/* `Headings
+----------------------------------------------------------------------------------------------------*/
+
+div#header { font-size: 0.75em; }
+h1 { font-size: 1.5em; }
+h2 { font-size: 1.4em; } 
+h3 { font-size: 1.3em; }
+h4 { font-size: 1.2em; }
+h5 { font-size: 1.1em; }
+h6 { font-size: 1.05em; }
+
+/* `Spacing
+----------------------------------------------------------------------------------------------------*/
+
+ol {
+  list-style: decimal;
+}
+
+ul {
+  list-style: disc;
+}
+
+
+p,
+dl,
+hr,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+ol,
+ul,
+pre,
+table,
+address,
+fieldset,
+figure {
+  margin-bottom: 20px;
+}

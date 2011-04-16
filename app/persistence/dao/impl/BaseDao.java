@@ -2,6 +2,7 @@ package persistence.dao.impl;
 
 import java.net.UnknownHostException;
 
+import play.Logger;
 import play.Play;
 
 import com.mongodb.BasicDBObject;
@@ -10,6 +11,7 @@ import com.mongodb.DBCollection;
 import com.mongodb.DBObject;
 import com.mongodb.Mongo;
 import com.mongodb.MongoException;
+import com.mysql.jdbc.log.Log;
 
 public class BaseDao implements IDBConstants {
 	
@@ -36,21 +38,17 @@ public class BaseDao implements IDBConstants {
 				mongo = new Mongo(databaseHost, Integer.parseInt(databasePort));
 
 			} catch (NumberFormatException nfe) {
-				System.err.println("ERROR: Setting database port " + databasePort + "failed");
-				nfe.printStackTrace();
+				Logger.error("ERROR: Setting database port " + databasePort + "failed", nfe);
 			} catch (UnknownHostException uhe) {
-				System.err.println("ERROR: Unknown host " + databaseHost);
-				uhe.printStackTrace();
+				Logger.error("ERROR: Unknown host " + databaseHost, uhe);
 			} catch (MongoException me) {
-				System.err.println("ERROR: Connecting to database (" + databaseHost + ":" + databasePort + " failed.");
-				me.printStackTrace();
+				Logger.error("ERROR: Connecting to database (" + databaseHost + ":" + databasePort + " failed.", me);
 			}
 		}
 	}
 
 	protected DB getDatabase() {
-		DB db = mongo.getDB(DEFAULT_DATABASE_NAME);
-		return db;
+		return mongo.getDB(DEFAULT_DATABASE_NAME);
 	}
 
 }

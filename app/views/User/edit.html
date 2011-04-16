@@ -1,10 +1,7 @@
 #{extends 'mediaman.html' /}
-#{set nickname:username /}
-#{set title:"Edit " + username  /}
+#{set title:"Edit " + nickname  /}
 
-<br/>
-<h2>Personal Data :</h2> <br/>
-
+<h2>Personal Data :</h2>
 
 <form action="@{saveChanges()}" method="POST">
     <label for="avatar">Avatar URL :</label>

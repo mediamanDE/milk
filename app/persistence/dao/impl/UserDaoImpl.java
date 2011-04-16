@@ -1,22 +1,24 @@
 package persistence.dao.impl;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
+
+import models.ExternalLink;
+import models.User;
+
+import org.apache.log4j.Logger;
+
+import persistence.dao.api.IUserDao;
 
 import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
-import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 
-import models.ExternalLink;
-import models.User;
-import persistence.dao.api.IUserDao;
-
 public class UserDaoImpl extends BaseDao implements IUserDao {
+
+	private static final Logger LOG = Logger.getLogger(UserDaoImpl.class);
 
 	public void store(User user) {
 
@@ -87,13 +89,16 @@ public class UserDaoImpl extends BaseDao implements IUserDao {
 	public User getByOpenId(String openId) {
 		User returnUser = null;
 
-		DB db = getDatabase();
-		DBCollection coll = db.getCollection(COLLECTION_USERS);
-		BasicDBObject result;
-
+		DBCollection coll = getDatabase().getCollection(COLLECTION_USERS);
+		if ( coll == null ) {
+			LOG.warn("Collection returned from mongoDB is 'null'! Can't continue!");
+			return null;
+		}
+		
 		BasicDBObject query = new BasicDBObject();
 		query.put(FIELD_USER_OPENID, openId);
-		result = (BasicDBObject) coll.findOne(query);
+		BasicDBObject result = (BasicDBObject) coll.findOne(query);
+		
 		if (result != null) {
 
 			returnUser = new User();
@@ -128,7 +133,9 @@ public class UserDaoImpl extends BaseDao implements IUserDao {
 				returnUser.setExternalLinks(externalLinks);
 			}
 
-			returnUser.debug();
+			if (LOG.isDebugEnabled()) {
+				LOG.debug("UserDaoImpl.getByOpenId() returned" + returnUser);
+			}
 		}
 		return returnUser;
 	}

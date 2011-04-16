@@ -3,6 +3,8 @@ package persistence.dao.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 import models.ExternalLink;
 import models.Group;
 import persistence.dao.api.IGroupDao;
@@ -16,6 +18,8 @@ import com.mongodb.DBObject;
 
 public class GroupDaoImpl extends BaseDao implements IGroupDao {
 
+	private static final Logger LOG = Logger.getLogger(GroupDaoImpl.class);
+	
 	@Override
 	public void store(Group group) {
 
@@ -49,7 +53,9 @@ public class GroupDaoImpl extends BaseDao implements IGroupDao {
             returnGroup.setName(result.getString(FIELD_GROUP_NAME));
             returnGroup.setDescription(result.getString(FIELD_GROUP_DESCRIPTION));
             
-            returnGroup.debug();
+            if ( LOG.isDebugEnabled() ) {
+            	LOG.debug("Returning from GroupDaoImpl.getGroupByName(): "+ returnGroup);
+            }
         }
         return returnGroup;
 	}
